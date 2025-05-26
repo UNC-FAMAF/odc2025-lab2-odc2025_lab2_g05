@@ -298,6 +298,77 @@ main:
 	bl dibujar_rectangulo
 
 
+
+
+
+
+
+
+    ///Suelo
+    mov x0, x20
+    mov x1, 0      // x_inicio (ajusta)
+    mov x2, 406                 // y_inicio (ajusta)
+    mov x3, SCREEN_WIDTH              // ancho (ajusta)
+    mov x4, 70               // alto (son delgadas)
+    movz x5, (SOMBRA_SUELO & 0x0000FFFF), lsl 0 // Usa el color de tu nube verde
+    movk x5, (SOMBRA_SUELO >> 16), lsl 16
+    bl dibujar_rectangulo
+
+
+
+
+    mov x0, x20
+    mov x1, 50      // x_inicio (ajusta)
+    mov x2, 435                 // y_inicio (ajusta)
+    mov x3, 40             // ancho (ajusta)
+    mov x4, 7               // alto (son delgadas)
+    movz x5, (DETALLES_AMARILLOS & 0x0000FFFF), lsl 0 
+    movk x5, (DETALLES_AMARILLOS >> 16), lsl 16
+    bl dibujar_rectangulo
+
+
+
+    mov x0, x20
+    mov x1, 200     // x_inicio (ajusta)
+    mov x2, 435                 // y_inicio (ajusta)
+    mov x3, 40             // ancho (ajusta)
+    mov x4, 7               // alto (son delgadas)
+    movz x5, (DETALLES_AMARILLOS & 0x0000FFFF), lsl 0 
+    movk x5, (DETALLES_AMARILLOS >> 16), lsl 16
+    bl dibujar_rectangulo
+
+
+    
+    mov x0, x20
+    mov x1, 350     // x_inicio (ajusta)
+    mov x2, 435                 // y_inicio (ajusta)
+    mov x3, 40             // ancho (ajusta)
+    mov x4, 7               // alto (son delgadas)
+    movz x5, (DETALLES_AMARILLOS & 0x0000FFFF), lsl 0 
+    movk x5, (DETALLES_AMARILLOS >> 16), lsl 16
+    bl dibujar_rectangulo
+
+
+
+     
+    mov x0, x20
+    mov x1, 500     // x_inicio (ajusta)
+    mov x2, 435                 // y_inicio (ajusta)
+    mov x3, 40             // ancho (ajusta)
+    mov x4, 7               // alto (son delgadas)
+    movz x5, (DETALLES_AMARILLOS & 0x0000FFFF), lsl 0 
+    movk x5, (DETALLES_AMARILLOS >> 16), lsl 16
+    bl dibujar_rectangulo
+
+
+
+
+
+
+
+
+
+
 	//Dibujamos La luna
 	mov x0, x20
 	mov x1, 130
@@ -506,6 +577,37 @@ main:
     movz x5, (AZUL & 0x0000FFFF), lsl 0 
     movk x5, (AZUL >> 16), lsl 16
     bl dibujar_rectangulo
+
+
+
+    //Edificio Naranja Izquierda (SOMBRA)
+    mov x0, x20
+    mov x1, 170                // x_inicio (ajusta)
+    mov x2, 274            	// y_inicio (ajusta)
+    mov x3, 60               // ancho (ajusta)
+    mov x4, 133                // alto (son delgadas)
+    movz x5, (0x00 & 0x0000FFFF), lsl 0 
+    movk x5, (0x00 >> 16), lsl 16
+    bl dibujar_rectangulo
+
+
+    mov x0, x20
+    mov x1, 175                // x_inicio (ajusta)
+    mov x2, 280            	// y_inicio (ajusta)
+    mov x3, 50               // ancho (ajusta)
+    mov x4, 120                // alto (son delgadas)
+    movz x5, (ROJO & 0x0000FFFF), lsl 0 
+    movk x5, (ROJO >> 16), lsl 16
+    bl dibujar_rectangulo
+
+
+
+
+
+
+
+
+
 
 
 //--------------------------------
@@ -858,6 +960,17 @@ main:
 
 	movz x4, (ROSA & 0x0000FFFF), lsl 0
 	movk x4, (ROSA >> 16), lsl 16
+	bl dibujar_circulo
+
+
+
+    mov x0, x20
+	mov x1, 450 
+	mov x2, 60
+	mov x3, 3 
+
+	movz x4, (DETALLES_AMARILLOS & 0x0000FFFF), lsl 0
+	movk x4, (DETALLES_AMARILLOS >> 16), lsl 16
 	bl dibujar_circulo
 
 
