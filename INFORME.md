@@ -5,7 +5,7 @@ Integrante 3:
 Integrante 4:
 
 
-Descripción ejercicio 1: 
+Descripción ejercicio 1: Consiste en el dibujo de una ciudad en un planeta extrano para ello, se implementan y utilizan rutinas para pintar pxieles, rectangulos y círculos, construyendo elementos como el cielo, edificios, estrellas, la luna y texto.
 
 
 Descripción ejercicio 2:
