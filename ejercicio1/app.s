@@ -18,6 +18,10 @@
 .equ DETALLES_AMARILLOS, 0xFFECC94B
 .equ SOMBRA_SUELO, 0xFF1A202C
 .equ ESTRUCTURAS_LEJANAS, 0xFF805AD5
+.equ FONDO_OSCURO, 0xFF0D1018
+
+
+
 
 //Argumentos x0 a x3
 //x0 = Direccion base del framebuffer (memoria de la pantalla)
@@ -37,13 +41,12 @@ dibujar_pixel:
 // ------------------------------------------------------------
 
 dibujar_rectangulo:	
-	// --- 1. Guardar registros del llamador (contexto) ---
-	stp x19, x20, [sp, -16]!	//Guarda x19 y x20 en la pila
-	stp x21, x22, [sp, -16]!  	// Guarda x21 y x22
-    stp x23, x24, [sp, -16]!  	// Guarda x23 y x24
-    stp x25, x30, [sp, -16]!  	// Guarda x25 y x30 (lr)
+	// Guardamos registros del llamador en la pila
+	stp x19, x20, [sp, -16]!	
+	stp x21, x22, [sp, -16]!  	
+    stp x23, x24, [sp, -16]!  
+    stp x25, x30, [sp, -16]!  	
 
-    // --- 2. Mover los argumentos a registros de "trabajo" ---
 	mov x19, x0                 // x19 = framebuffer_base
     mov x20, x1                 // x20 = x_inicio
     mov x21, x2                 // x21 = y_inicio
@@ -51,180 +54,130 @@ dibujar_rectangulo:
     mov x23, x4                 // x23 = alto
     mov x24, x5                 // x24 = color
 
-	// --- 3. Bucle Exterior: Iterar sobre las Filas (Coordenada Y) ---
-	mov x25, x21 // x25 es nuestro contador 'y_actual'. Lo inicializamos con y_inicio
+	// Iterar sobre las Filas
+	mov x25, x21 // x25 es nuestro contador. Lo inicializamos con y_inicio
 loop_rect_y:
-	//El bucle debe ir desde y_inicio hasta (y_inicio + alto - 1)
-	add x26, x21, x23           // x26 = y_inicio + alto (este es el "límite" o la coordenada "después del final")
+	add x26, x21, x23           // x26 = y_inicio + alto 
     cmp x25, x26                // Compara: ¿y_actual (x25) >= y_inicio + alto (x26)?
-    bge end_rect_y              // Si sí (mayor o igual), salta al final del bucle Y. (bge = branch if greater than or equal)
+    bge end_rect_y              // Si sí salta al final del bucle Y.
 
-// --- 4. Bucle Interior: Iterar sobre las Columnas (Coordenada X) para la Fila Actual ---
-    // Este bucle pinta todos los píxeles de UNA SOLA fila.
-    mov x27, x20                // x27 es nuestro contador 'x_actual'. Lo inicializamos con x_inicio para cada nueva fila.
+    mov x27, x20                // x27 es nuestro contador 'x_actual'.
+
 loop_rect_x:
-    // Calcular el límite derecho para X (hasta dónde debe llegar este bucle)
-    // El bucle debe ir desde x_inicio hasta (x_inicio + ancho - 1).
-    // Por lo tanto, salimos si x_actual es mayor o igual a (x_inicio + ancho).
-    add x28, x20, x22           // x28 = x_inicio + ancho (este es el "límite" o la coordenada "después del final")
-    cmp x27, x28                // Compara: ¿x_actual (x27) >= x_inicio + ancho (x28)?
-    bge end_rect_x              // Si sí (mayor o igual), salta al final del bucle X.
 
-// --- 5. ¡Pintar el píxel actual! ---
-    // Aquí es donde llamamos a 'dibujar_pixel' para el píxel en (x_actual, y_actual)
-    // Pasamos los argumentos a 'dibujar_pixel' en los registros que espera (x0, x1, x2, x3).
-    mov x0, x19                 // Argumento 1: framebuffer_base (que lo tenemos guardado en x19)
-    mov x1, x27                 // Argumento 2: x_actual (la X de nuestro píxel actual)
-    mov x2, x25                 // Argumento 3: y_actual (la Y de nuestro píxel actual)
-    mov x3, x24                 // Argumento 4: color (que lo tenemos guardado en x24)
-    bl dibujar_pixel            // ¡Llama a la rutina que realmente pinta el píxel!
-                                // Después de esta llamada, la ejecución vuelve a la siguiente línea.
+    add x28, x20, x22           // x28 = x_inicio + ancho 
+    cmp x27, x28                // ¿x_actual (x27) >= x_inicio + ancho (x28)?
+    bge end_rect_x              // Si sí, salta al final del bucle X.
+
+    //pintamos pixel
+    mov x0, x19                 //framebuffer_base 
+    mov x1, x27                 //x_actual (la X de nuestro píxel actual)
+    mov x2, x25                 //y_actual (la Y de nuestro píxel actual)
+    mov x3, x24                 //color (que lo tenemos guardado en x24)
+    bl dibujar_pixel            
 	
-	// --- 6. Avanzar al siguiente píxel en la fila y repetir ---
-    add x27, x27, 1             // Incrementa x_actual (x_actual = x_actual + 1). Vamos al siguiente píxel a la derecha.
-    b loop_rect_x               // Salta de nuevo al inicio del bucle X para la siguiente columna.
+    add x27, x27, 1             //x_actual = x_actual + 1)
+    b loop_rect_x               
 
-end_rect_x:                     // Etiqueta donde salimos del bucle X (cuando una fila está completa)
+end_rect_x:                     
     
-	// --- 7. Avanzar a la siguiente fila y repetir ---
-    add x25, x25, 1             // Incrementa y_actual (y_actual = y_actual + 1). Vamos a la siguiente fila.
-    b loop_rect_y               // Salta de nuevo al inicio del bucle Y para la siguiente fila.
+    add x25, x25, 1             //y_actual = y_actual + 1.
+    b loop_rect_y               
 
-end_rect_y:                     // Etiqueta donde salimos del bucle Y (cuando todas las filas están completas)
+end_rect_y:                     
 
-    // --- 8. Restaurar registros del llamador y retornar ---
-    // Estas instrucciones 'ldp' restauran los valores originales de los registros
-    // que habíamos guardado al principio. Se hace en orden INVERSO al 'stp'.
-    // 'sp, 16' incrementa el Stack Pointer para liberar el espacio.
+    //restauraramos los registros
+
     ldp x25, x30, [sp], 16   // Restaura x25 y x30 (lr)
     ldp x23, x24, [sp], 16   // Restaura x23 y x24
     ldp x21, x22, [sp], 16   // Restaura x21 y x22
     ldp x19, x20, [sp], 16   // Restaura x19 y x20
     ret                      // Regresa al punto del código que llamó a dibujar_rectangulo.
 
-/*
-En Resumen (Más Sencillo):
-dibujar_rectangulo es como un robot que tiene dos contadores.
-
-El primer contador (y_actual) se encarga de ir de fila en fila (de arriba a abajo).
-Por cada fila, el segundo contador (x_actual) se encarga de ir de píxel en píxel dentro de esa fila (de izquierda a derecha).
-En cada píxel que visita, le dice a dibujar_pixel: "Pinta este píxel en esta (X,Y) con el color que te di".
-Cuando ha pintado todos los píxeles de la fila, el primer contador pasa a la siguiente fila y el segundo contador vuelve a empezar.
-Cuando ha pintado todas las filas, ha terminado el rectángulo y vuelve a donde lo llamaron.
-
-*/
-
 
 //------------------------------------------------------
-/*
-Dibujar circulo
-
-dibujar_circulo es un robot que:
-
-Calcula dónde está el centro del círculo y qué tan grande es (su radio).
-Traza un cuadrado imaginario alrededor del círculo.
-Usa dos contadores (uno para X y otro para Y) para ir visitando cada píxel dentro de ese cuadrado imaginario.
-Para cada píxel visitado, hace una pregunta matemática: "¿Este píxel está lo suficientemente cerca del centro (según la fórmula del círculo)?"
-Si la respuesta es "Sí", le dice a dibujar_pixel: "Pinta este píxel".
-Si la respuesta es "No", simplemente salta al siguiente píxel sin pintarlo.
-Cuando ha visitado todos los píxeles del cuadrado, significa que ya ha dibujado el círculo, y regresa.
-
-Argumentos que necesita (x0 a x4):
-
-x0: Dirección base del framebuffer.
-x1: cx (Coordenada X del centro del círculo).
-x2: cy (Coordenada Y del centro del círculo).
-x3: radio (El radio del círculo).
-x4: color (El color con el que pintar el círculo).
-
-
-*/
 
 dibujar_circulo:
-    // --- 1. Guardar registros del llamador (stp) ---
-    // Igual que en dibujar_rectangulo, guardamos los registros "callee-saved"
+    //guardamos registros 
 	stp x19, x20, [sp, -16]!
     stp x21, x22, [sp, -16]!
     stp x23, x24, [sp, -16]!
     stp x25, x30, [sp, -16]!
 
-	// --- 2. Mover los argumentos a registros de "trabajo" ---
+	//mover los argumentos a registros 
     mov x19, x0     // x19 = framebuffer_base
     mov x20, x1     // x20 = cx (centro x)
     mov x21, x2     // x21 = cy (centro y)
     mov x22, x3     // x22 = radio
     mov x23, x4     // x23 = color
 
-    // --- 3. Calcular radio al cuadrado  ---
-    // Esto lo calculamos una sola vez aquí, en lugar de hacerlo en cada píxel del bucle.
-    // Esto es una optimización importante para que sea más rápido.
+    //Calculo radio al cuadrado
     mul x24, x22, x22 // x24 = radio * radio (radio^2)
 
-	// --- 4. Bucle Exterior: Iterar sobre las Filas (y_actual) ---
     // Este bucle va desde (cy - radio) hasta (cy + radio).
-    sub x25, x21, x22   // y_start = cy - radio (El límite superior de Y para el cuadrado)
-    mov x26, x25        // x26 es nuestro contador 'y_actual'. Lo inicializamos en y_start.
+    sub x25, x21, x22   // y_start = cy - radio 
+    mov x26, x25        // x26 es nuestro contador 'y_actual'. 
+
 loop_circle_y:
-    add x27, x21, x22   // y_end = cy + radio (El límite inferior de Y para el cuadrado)
-    cmp x26, x27        // Compara: ¿y_actual (x26) > y_end (x27)?
-    bgt end_circle_y    // Si sí (mayor), salta al final del bucle Y. (bgt = branch if greater than)
 
- // --- 5. Bucle Interior: Iterar sobre las Columnas (x_actual) para la Fila Actual ---
+    add x27, x21, x22   // y_end = cy + radio 
+    cmp x26, x27        //y_actual (x26) > y_end (x27)?
+    bgt end_circle_y    //si sí, salta al final del bucle Y
+
     // Este bucle va desde (cx - radio) hasta (cx + radio).
-    sub x28, x20, x22   // x_start = cx - radio (El límite izquierdo de X para el cuadrado)
-    mov x29, x28        // x29 es nuestro contador 'x_actual'. Lo inicializamos en x_start para cada nueva fila.
-loop_circle_x:
-    add x30, x20, x22   // x_end = cx + radio (El límite derecho de X para el cuadrado)
-    cmp x29, x30        // Compara: ¿x_actual (x29) > x_end (x30)?
-    bgt end_circle_x    // Si sí (mayor), salta al final del bucle X.
+    sub x28, x20, x22   // x_start = cx - radio 
+    mov x29, x28        // x29 es nuestro contador 'x_actual'
 
-// --- 6. Aplicar la Fórmula del Círculo para el Píxel Actual (x_actual, y_actual) ---
+loop_circle_x:
+
+    add x30, x20, x22   // x_end = cx + radio
+    cmp x29, x30        //x_actual (x29) > x_end (x30)?
+    bgt end_circle_x    //si sí (mayor), salta al final del bucle X.
+
     // Calcular (x_actual - cx)^2
-    sub x5, x29, x20   // x5 = x_actual - cx (distancia horizontal del píxel al centro)
-    mul x5, x5, x5     // x5 = x5 * x5 (distancia horizontal al cuadrado)
+    sub x5, x29, x20   // x5 = x_actual - cx 
+    mul x5, x5, x5     // x5 = x5 * x5 
 
     // Calcular (y_actual - cy)^2
-    sub x6, x26, x21   // x6 = y_actual - cy (distancia vertical del píxel al centro)
-    mul x6, x6, x6     // x6 = x6 * x6 (distancia vertical al cuadrado)
+    sub x6, x26, x21   // x6 = y_actual - cy 
+    mul x6, x6, x6     // x6 = x6 * x6 
 
     // Calcular la distancia al cuadrado desde el centro: (x-cx)^2 + (y-cy)^2
     add x7, x5, x6     // x7 = (x-cx)^2 + (y-cy)^2
 
-    // --- 7. Decidir si Pintar el Píxel (Comparar con radio^2) ---
-    cmp x7, x24        // Compara: ¿distancia_cuadrada (x7) <= radio^2 (x24)?
-    ble draw_circle_pixel // Si sí (menor o igual), salta a pintar el píxel. (ble = branch if less than or equal)
 
-    b skip_draw_circle_pixel // Si no, salta directamente a la siguiente iteración (sin pintar).
+    cmp x7, x24        //distancia_cuadrada (x7) <= radio^2 (x24)?
+    ble draw_circle_pixel //si sí, salta a pintar el píxel
 
-draw_circle_pixel:       // Etiqueta para cuando el píxel está dentro del círculo
-    // --- 8. ¡Pintar el píxel actual! ---
+    b skip_draw_circle_pixel 
+
+draw_circle_pixel:       //etiqueta para cuando el píxel está dentro del círculo
+
     // Pasamos los argumentos a 'dibujar_pixel' en los registros que espera (x0, x1, x2, x3).
-    mov x0, x19     // Argumento 1: framebuffer_base (que lo tenemos guardado en x19)
-    mov x1, x29     // Argumento 2: x_actual (la X de nuestro píxel actual)
-    mov x2, x26     // Argumento 3: y_actual (la Y de nuestro píxel actual)
-    mov x3, x23     // Argumento 4: color (que lo tenemos guardado en x23)
-    bl dibujar_pixel // Llama a la rutina que realmente pinta el píxel.
+    mov x0, x19     //framebuffer_base 
+    mov x1, x29     //x_actual 
+    mov x2, x26     //y_actual
+    mov x3, x23     //color
+    bl dibujar_pixel 
 
-skip_draw_circle_pixel:  // Etiqueta donde continuamos después de decidir si pintar o no
-    // --- 9. Avanzar al siguiente píxel en la fila y repetir ---
-    add x29, x29, 1 // Incrementa x_actual (x_actual = x_actual + 1). Vamos al siguiente píxel a la derecha.
-    b loop_circle_x // Salta de nuevo al inicio del bucle X para la siguiente columna.
+skip_draw_circle_pixel:  
+
+    add x29, x29, 1 //x_actual = x_actual + 1.
+    b loop_circle_x 
+
 end_circle_x:
 
-    // --- 10. Avanzar a la siguiente fila y repetir ---
-    add x26, x26, 1 // Incrementa y_actual (y_actual = y_actual + 1). Vamos a la siguiente fila.
-    b loop_circle_y // Salta de nuevo al inicio del bucle Y para la siguiente fila.
+    add x26, x26, 1 //y_actual = y_actual + 1
+    b loop_circle_y 
+
 end_circle_y:
 
-    // --- 11. Restaurar registros del llamador y retornar ---
-    // Restauramos los valores originales de los registros en orden inverso al 'stp'.
+    //restauramos los valores originales de los registros
     ldp x25, x30, [sp], 16
     ldp x23, x24, [sp], 16
     ldp x21, x22, [sp], 16
     ldp x19, x20, [sp], 16
     ret
-
-
 
 //------------------------------------------------------------------
 //main
@@ -233,9 +186,9 @@ end_circle_y:
 
 main:
     mov x20, x0 // Guarda la dirección base del framebuffer en x20
-    // x0 es el primer argumento que el sistema le pasa a 'main',
-    // y en este caso, es la dirección de memoria donde puedes escribir para pintar la pantalla.
-    // La guardamos en x20 porque x0 se usará para pasar argumentos a tus rutinas de dibujo.
+                // x0 es el primer argumento que el sistema le pasa a 'main',
+                // y en este caso, es la dirección de memoria donde puedes escribir para pintar la pantalla.
+                // La guardamos en x20 porque x0 se usará para pasar argumentos a tus rutinas de dibujo.
 
 	//Dibujamos FONDO
 	mov x0, x20
@@ -249,23 +202,16 @@ main:
 	bl dibujar_rectangulo
 
 
-
-
-
-
-
-
     ///Suelo
+
     mov x0, x20
     mov x1, 0      
-    mov x2, 406                 
+    mov x2, 410                 
     mov x3, SCREEN_WIDTH              
     mov x4, 70               
     movz x5, (SOMBRA_SUELO & 0x0000FFFF), lsl 0 
     movk x5, (SOMBRA_SUELO >> 16), lsl 16
     bl dibujar_rectangulo
-
-
 
 
     mov x0, x20
@@ -277,8 +223,6 @@ main:
     movk x5, (DETALLES_AMARILLOS >> 16), lsl 16
     bl dibujar_rectangulo
 
-
-
     mov x0, x20
     mov x1, 200     
     mov x2, 435                 
@@ -288,8 +232,6 @@ main:
     movk x5, (DETALLES_AMARILLOS >> 16), lsl 16
     bl dibujar_rectangulo
 
-
-    
     mov x0, x20
     mov x1, 350     
     mov x2, 435                 
@@ -299,9 +241,6 @@ main:
     movk x5, (DETALLES_AMARILLOS >> 16), lsl 16
     bl dibujar_rectangulo
 
-
-
-     
     mov x0, x20
     mov x1, 500     
     mov x2, 435                 
@@ -313,11 +252,104 @@ main:
 
 
 
+    //Edificios de Atras
+ 
+    mov x0, x20
+    mov x1, 0      
+    mov x2, 305                
+    mov x3, SCREEN_WIDTH              
+    mov x4, 108               
+    movz x5, (FONDO_OSCURO & 0x0000FFFF), lsl 0 
+    movk x5, (FONDO_OSCURO >> 16), lsl 16
+    bl dibujar_rectangulo
 
 
+    mov x0, x20
+    mov x1, 10      
+    mov x2, 295                
+    mov x3, 20              
+    mov x4, 108               
+    movz x5, (FONDO_OSCURO & 0x0000FFFF), lsl 0 
+    movk x5, (FONDO_OSCURO >> 16), lsl 16
+    bl dibujar_rectangulo
+
+    mov x0, x20
+    mov x1, 30      
+    mov x2, 250                
+    mov x3, 20              
+    mov x4, 108               
+    movz x5, (FONDO_OSCURO & 0x0000FFFF), lsl 0 
+    movk x5, (FONDO_OSCURO >> 16), lsl 16
+    bl dibujar_rectangulo
 
 
+    mov x0, x20
+    mov x1, 250      
+    mov x2, 270                
+    mov x3, 20              
+    mov x4, 108               
+    movz x5, (FONDO_OSCURO & 0x0000FFFF), lsl 0 
+    movk x5, (FONDO_OSCURO >> 16), lsl 16
+    bl dibujar_rectangulo
 
+    mov x0, x20
+    mov x1, 245      
+    mov x2, 260                
+    mov x3, 10              
+    mov x4, 108               
+    movz x5, (FONDO_OSCURO & 0x0000FFFF), lsl 0 
+    movk x5, (FONDO_OSCURO >> 16), lsl 16
+    bl dibujar_rectangulo
+
+
+    mov x0, x20
+    mov x1, 545      
+    mov x2, 260                
+    mov x3, 10              
+    mov x4, 108               
+    movz x5, (FONDO_OSCURO & 0x0000FFFF), lsl 0 
+    movk x5, (FONDO_OSCURO >> 16), lsl 16
+    bl dibujar_rectangulo
+
+
+    mov x0, x20
+    mov x1, 555      
+    mov x2, 240                
+    mov x3, 20              
+    mov x4, 108               
+    movz x5, (FONDO_OSCURO & 0x0000FFFF), lsl 0 
+    movk x5, (FONDO_OSCURO >> 16), lsl 16
+    bl dibujar_rectangulo
+
+
+    mov x0, x20
+    mov x1, 575      
+    mov x2, 260                
+    mov x3, 10              
+    mov x4, 108               
+    movz x5, (FONDO_OSCURO & 0x0000FFFF), lsl 0 
+    movk x5, (FONDO_OSCURO >> 16), lsl 16
+    bl dibujar_rectangulo
+
+
+    mov x0, x20
+    mov x1, 560      
+    mov x2, 220                
+    mov x3, 10              
+    mov x4, 108               
+    movz x5, (FONDO_OSCURO & 0x0000FFFF), lsl 0 
+    movk x5, (FONDO_OSCURO >> 16), lsl 16
+    bl dibujar_rectangulo
+
+
+    mov x0, x20
+    mov x1, 490      
+    mov x2, 270                
+    mov x3, 20              
+    mov x4, 40               
+    movz x5, (FONDO_OSCURO & 0x0000FFFF), lsl 0 
+    movk x5, (FONDO_OSCURO >> 16), lsl 16
+    bl dibujar_rectangulo
 
 
 	//Dibujamos La luna
