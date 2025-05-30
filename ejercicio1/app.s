@@ -380,6 +380,33 @@ main:
 	movk x4, (ROJO >> 16), lsl 16
 	bl dibujar_circulo
 
+
+
+    mov x0, x20
+	mov x1, 40
+	mov x2, 70
+	mov x3, 20 
+
+	//Cargamos el color
+	movz x4, (DETALLES_AMARILLOS & 0x0000FFFF), lsl 0
+	movk x4, (DETALLES_AMARILLOS >> 16), lsl 16
+	bl dibujar_circulo
+
+    mov x0, x20
+    mov x1, 10                 // x_inicio (ajusta)
+    mov x2, 70                // y_inicio (ajusta)
+    mov x3, 60                  // ancho (ajusta)
+    mov x4, 6                  // alto (son delgadas)
+    movz x5, (ESTRUCTURAS_LEJANAS & 0x0000FFFF), lsl 0 // Usa el color de tu nube verde
+    movk x5, (ESTRUCTURAS_LEJANAS >> 16), lsl 16
+    bl dibujar_rectangulo
+
+
+
+
+
+    //NUBES
+
 	// B. DIBUJAR LAS "NUBES" RECTANGULARES (Ejemplos, tendrás que añadir más)
     // Nube 1 (en la parte superior)
     mov x0, x20
@@ -399,7 +426,6 @@ main:
     movz x5, (TURQUESA & 0x0000FFFF), lsl 0 // Usa el color de tu nube verde
     movk x5, (TURQUESA >> 16), lsl 16
     bl dibujar_rectangulo
-
 
 	mov x0, x20
     mov x1, 90                // x_inicio (ajusta)
@@ -427,6 +453,37 @@ main:
     mov x4, 3                // alto (son delgadas)
     movz x5, (TURQUESA & 0x0000FFFF), lsl 0 // Usa el color de tu nube verde
     movk x5, (TURQUESA >> 16), lsl 16
+    bl dibujar_rectangulo
+
+
+
+    mov x0, x20
+    mov x1, 500                // x_inicio (ajusta)
+    mov x2, 100             	// y_inicio (ajusta)
+    mov x3, 20               // ancho (ajusta)
+    mov x4, 3                // alto (son delgadas)
+    movz x5, (TURQUESA & 0x0000FFFF), lsl 0 // Usa el color de tu nube verde
+    movk x5, (TURQUESA >> 16), lsl 16
+    bl dibujar_rectangulo
+
+
+    mov x0, x20
+    mov x1, 530                // x_inicio (ajusta)
+    mov x2, 50             	// y_inicio (ajusta)
+    mov x3, 80              // ancho (ajusta)
+    mov x4, 6                // alto (son delgadas)
+    movz x5, (TURQUESA & 0x0000FFFF), lsl 0 // Usa el color de tu nube verde
+    movk x5, (TURQUESA >> 16), lsl 16
+    bl dibujar_rectangulo
+
+
+    mov x0, x20
+    mov x1, 540                // x_inicio (ajusta)
+    mov x2, 44             	// y_inicio (ajusta)
+    mov x3, 60              // ancho (ajusta)
+    mov x4, 6                // alto (son delgadas)
+    movz x5, (VERDE_CLARO & 0x0000FFFF), lsl 0 // Usa el color de tu nube verde
+    movk x5, (VERDE_CLARO >> 16), lsl 16
     bl dibujar_rectangulo
 
 
@@ -536,8 +593,6 @@ main:
     bl dibujar_rectangulo
 
 
-
-
     //SOMBRA Edificio chico morado de la derecha
     mov x0, x20
     mov x1, 360                // x_inicio (ajusta)
@@ -601,6 +656,53 @@ main:
     bl dibujar_rectangulo
 
 
+    //Sombra edifico amarillo
+    mov x0, x20
+    mov x1, 120                // x_inicio (ajusta)
+    mov x2, 308            	// y_inicio (ajusta)
+    mov x3, 50               // ancho (ajusta)
+    mov x4, 100                // alto (son delgadas)
+    movz x5, (0x00 & 0x0000FFFF), lsl 0 
+    movk x5, (0x00 >> 16), lsl 16
+    bl dibujar_rectangulo
+
+    mov x0, x20
+    mov x1, 125                // x_inicio (ajusta)
+    mov x2, 318            	// y_inicio (ajusta)
+    mov x3, 44               // ancho (ajusta)
+    mov x4, 82                // alto (son delgadas)
+    movz x5, (DETALLES_AMARILLOS & 0x0000FFFF), lsl 0 
+    movk x5, (DETALLES_AMARILLOS >> 16), lsl 16
+    bl dibujar_rectangulo
+
+
+    mov x0, x20
+    mov x1, 60                // x_inicio (ajusta)
+    mov x2, 256            	// y_inicio (ajusta)
+    mov x3, 60               // ancho (ajusta)
+    mov x4, 150                // alto (son delgadas)
+    movz x5, (0x00 & 0x0000FFFF), lsl 0 
+    movk x5, (0x00 >> 16), lsl 16
+    bl dibujar_rectangulo
+
+    mov x0, x20
+    mov x1, 66                // x_inicio (ajusta)
+    mov x2, 260            	// y_inicio (ajusta)
+    mov x3, 48               // ancho (ajusta)
+    mov x4, 140                // alto (son delgadas)
+    movz x5, (MAGENTA & 0x0000FFFF), lsl 0 
+    movk x5, (MAGENTA >> 16), lsl 16
+    bl dibujar_rectangulo
+
+
+    mov x0, x20
+    mov x1, 100             // x_inicio (ajusta)
+    mov x2, 290            	// y_inicio (ajusta)
+    mov x3, 10               // ancho (ajusta)
+    mov x4, 100               // alto (son delgadas)
+    movz x5, (FONDO & 0x0000FFFF), lsl 0 
+    movk x5, (FONDO >> 16), lsl 16
+    bl dibujar_rectangulo
 
 
 
@@ -899,8 +1001,8 @@ main:
 	mov x3, 3 //Tamano
 
 	//Cargamos el color
-	movz x4, (ROSA & 0x0000FFFF), lsl 0
-	movk x4, (ROSA >> 16), lsl 16
+	movz x4, (DETALLES_AMARILLOS & 0x0000FFFF), lsl 0
+	movk x4, (DETALLES_AMARILLOS >> 16), lsl 16
 	bl dibujar_circulo
 
 
@@ -929,8 +1031,8 @@ main:
 	mov x2, 50
 	mov x3, 3 
 
-	movz x4, (ROSA & 0x0000FFFF), lsl 0
-	movk x4, (ROSA >> 16), lsl 16
+	movz x4, (DETALLES_AMARILLOS & 0x0000FFFF), lsl 0
+	movk x4, (DETALLES_AMARILLOS >> 16), lsl 16
 	bl dibujar_circulo
 
     mov x0, x20
@@ -948,8 +1050,8 @@ main:
 	mov x2, 150
 	mov x3, 3 
 
-	movz x4, (ROSA & 0x0000FFFF), lsl 0
-	movk x4, (ROSA >> 16), lsl 16
+	movz x4, (DETALLES_AMARILLOS & 0x0000FFFF), lsl 0
+	movk x4, (DETALLES_AMARILLOS >> 16), lsl 16
 	bl dibujar_circulo
 
 
@@ -969,9 +1071,50 @@ main:
 	mov x2, 60
 	mov x3, 3 
 
+	movz x4, (ROSA & 0x0000FFFF), lsl 0
+	movk x4, (ROSA >> 16), lsl 16
+	bl dibujar_circulo
+
+
+    mov x0, x20
+	mov x1, 350
+	mov x2, 60
+	mov x3, 3 
+
+	movz x4, (ROSA & 0x0000FFFF), lsl 0
+	movk x4, (ROSA >> 16), lsl 16
+	bl dibujar_circulo
+
+
+    mov x0, x20
+	mov x1, 390
+	mov x2, 30
+	mov x3, 3 
+
 	movz x4, (DETALLES_AMARILLOS & 0x0000FFFF), lsl 0
 	movk x4, (DETALLES_AMARILLOS >> 16), lsl 16
 	bl dibujar_circulo
+
+
+    mov x0, x20
+	mov x1, 600
+	mov x2, 200
+	mov x3, 3 
+
+	movz x4, (DETALLES_AMARILLOS & 0x0000FFFF), lsl 0
+	movk x4, (DETALLES_AMARILLOS >> 16), lsl 16
+	bl dibujar_circulo
+
+
+    mov x0, x20
+	mov x1, 260
+	mov x2, 200
+	mov x3, 3 
+
+	movz x4, (DETALLES_AMARILLOS & 0x0000FFFF), lsl 0
+	movk x4, (DETALLES_AMARILLOS >> 16), lsl 16
+	bl dibujar_circulo
+
 
 
 InfLoop:
