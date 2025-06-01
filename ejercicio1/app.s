@@ -15,28 +15,23 @@
 .equ VERDE_CLARO, 0xFF38A169
 .equ VERDE_OCEANO, 0xFF2E8B57
 .equ TURQUESA, 0xFF319795
-.equ DETALLES_AMARILLOS, 0xFFECC94B
+.equ AMARILLO, 0xFFECC94B
 .equ SOMBRA_SUELO, 0xFF1A202C
 .equ ESTRUCTURAS_LEJANAS, 0xFF805AD5
 .equ FONDO_OSCURO, 0xFF0D1018
 
-
-
-
-//Argumentos x0 a x3
 //x0 = Direccion base del framebuffer (memoria de la pantalla)
 //x1 = Coordenada X del pixel a dibujar
 //x2 = Coordenada Y del pixel a dibujar
 //x3 = El color del pixel en su formato
 
-
 dibujar_pixel:
-	mov x10, SCREEN_WIDTH    // Cargar la constante SCREEN_WIDTH en un registro temporal 
-	mul x4, x2, x10          // x4 = Y * SCREEN_WIDTH (multiplica el Y del píxel por el ancho de la pantalla)
-	add x4, x4, x1           // x4 = x4 + X (le sumas la coordenada X del píxel)
-	lsl x4, x4, 2            // x4 = x4 * 4 (multiplica por 4, ya que 32 BPP = 4 bytes por píxel)
+	mov x10, SCREEN_WIDTH    // Cargar la constante SCREEN_WIDTH 
+	mul x4, x2, x10          // x4 = Y * SCREEN_WIDTH 
+	add x4, x4, x1           // x4 = x4 + X 
+	lsl x4, x4, 2            // x4 = x4 * 4 
 	add x5, x0, x4           // x5 = framebuffer_base (x0) + offset (x4)
-	str w3, [x5]             // Guarda el contenido de w3 (tu color) en la dirección de memoria apuntada por x5
+	str w3, [x5]             // Guarda el contenido de w3 en la dirección de memoria apuntada por x5
 	ret
 // ------------------------------------------------------------
 
@@ -190,7 +185,7 @@ main:
                 // y en este caso, es la dirección de memoria donde puedes escribir para pintar la pantalla.
                 // La guardamos en x20 porque x0 se usará para pasar argumentos a tus rutinas de dibujo.
 
-	//Dibujamos FONDO
+	//FONDO
 	mov x0, x20
 	mov x1, 0
 	mov x2, 0
@@ -219,8 +214,8 @@ main:
     mov x2, 435                 
     mov x3, 40             
     mov x4, 7               
-    movz x5, (DETALLES_AMARILLOS & 0x0000FFFF), lsl 0 
-    movk x5, (DETALLES_AMARILLOS >> 16), lsl 16
+    movz x5, (AMARILLO & 0x0000FFFF), lsl 0 
+    movk x5, (AMARILLO >> 16), lsl 16
     bl dibujar_rectangulo
 
     mov x0, x20
@@ -228,8 +223,8 @@ main:
     mov x2, 435                 
     mov x3, 40             
     mov x4, 7               
-    movz x5, (DETALLES_AMARILLOS & 0x0000FFFF), lsl 0 
-    movk x5, (DETALLES_AMARILLOS >> 16), lsl 16
+    movz x5, (AMARILLO & 0x0000FFFF), lsl 0 
+    movk x5, (AMARILLO >> 16), lsl 16
     bl dibujar_rectangulo
 
     mov x0, x20
@@ -237,8 +232,8 @@ main:
     mov x2, 435                 
     mov x3, 40             
     mov x4, 7               
-    movz x5, (DETALLES_AMARILLOS & 0x0000FFFF), lsl 0 
-    movk x5, (DETALLES_AMARILLOS >> 16), lsl 16
+    movz x5, (AMARILLO & 0x0000FFFF), lsl 0 
+    movk x5, (AMARILLO >> 16), lsl 16
     bl dibujar_rectangulo
 
     mov x0, x20
@@ -246,11 +241,9 @@ main:
     mov x2, 435                 
     mov x3, 40             
     mov x4, 7               
-    movz x5, (DETALLES_AMARILLOS & 0x0000FFFF), lsl 0 
-    movk x5, (DETALLES_AMARILLOS >> 16), lsl 16
+    movz x5, (AMARILLO & 0x0000FFFF), lsl 0 
+    movk x5, (AMARILLO >> 16), lsl 16
     bl dibujar_rectangulo
-
-
 
     //Edificios de Atras
  
@@ -262,7 +255,6 @@ main:
     movz x5, (FONDO_OSCURO & 0x0000FFFF), lsl 0 
     movk x5, (FONDO_OSCURO >> 16), lsl 16
     bl dibujar_rectangulo
-
 
     mov x0, x20
     mov x1, 10      
@@ -282,7 +274,6 @@ main:
     movk x5, (FONDO_OSCURO >> 16), lsl 16
     bl dibujar_rectangulo
 
-
     mov x0, x20
     mov x1, 250      
     mov x2, 270                
@@ -301,7 +292,6 @@ main:
     movk x5, (FONDO_OSCURO >> 16), lsl 16
     bl dibujar_rectangulo
 
-
     mov x0, x20
     mov x1, 545      
     mov x2, 260                
@@ -310,7 +300,6 @@ main:
     movz x5, (FONDO_OSCURO & 0x0000FFFF), lsl 0 
     movk x5, (FONDO_OSCURO >> 16), lsl 16
     bl dibujar_rectangulo
-
 
     mov x0, x20
     mov x1, 555      
@@ -321,7 +310,6 @@ main:
     movk x5, (FONDO_OSCURO >> 16), lsl 16
     bl dibujar_rectangulo
 
-
     mov x0, x20
     mov x1, 575      
     mov x2, 260                
@@ -330,7 +318,6 @@ main:
     movz x5, (FONDO_OSCURO & 0x0000FFFF), lsl 0 
     movk x5, (FONDO_OSCURO >> 16), lsl 16
     bl dibujar_rectangulo
-
 
     mov x0, x20
     mov x1, 560      
@@ -341,7 +328,6 @@ main:
     movk x5, (FONDO_OSCURO >> 16), lsl 16
     bl dibujar_rectangulo
 
-
     mov x0, x20
     mov x1, 490      
     mov x2, 270                
@@ -351,28 +337,23 @@ main:
     movk x5, (FONDO_OSCURO >> 16), lsl 16
     bl dibujar_rectangulo
 
-
 	//Dibujamos La luna
 	mov x0, x20
 	mov x1, 130
 	mov x2, 150
 	mov x3, 60 
 
-	//Cargamos el color
 	movz x4, (ROJO & 0x0000FFFF), lsl 0
 	movk x4, (ROJO >> 16), lsl 16
 	bl dibujar_circulo
-
-
 
     mov x0, x20
 	mov x1, 40
 	mov x2, 70
 	mov x3, 20 
 
-	//Cargamos el color
-	movz x4, (DETALLES_AMARILLOS & 0x0000FFFF), lsl 0
-	movk x4, (DETALLES_AMARILLOS >> 16), lsl 16
+	movz x4, (AMARILLO & 0x0000FFFF), lsl 0
+	movk x4, (AMARILLO >> 16), lsl 16
 	bl dibujar_circulo
 
     mov x0, x20
@@ -383,7 +364,6 @@ main:
     movz x5, (ESTRUCTURAS_LEJANAS & 0x0000FFFF), lsl 0 
     movk x5, (ESTRUCTURAS_LEJANAS >> 16), lsl 16
     bl dibujar_rectangulo
-
 
     //NUBES
 
@@ -459,10 +439,7 @@ main:
     movk x5, (VERDE_CLARO >> 16), lsl 16
     bl dibujar_rectangulo
 
-
-
 	//Edificios
-
 
     //Sombra principal edificio principal:
     mov x0, x20
@@ -473,8 +450,6 @@ main:
     movz x5, (0x00 & 0x0000FFFF), lsl 0 
     movk x5, (0x00 >> 16), lsl 16
     bl dibujar_rectangulo
-
-
 
 	//principal
 	mov x0, x20
@@ -494,7 +469,6 @@ main:
     movz x5, (AZUL_OSCURO & 0x0000FFFF), lsl 0 
     movk x5, (AZUL_OSCURO >> 16), lsl 16
     bl dibujar_rectangulo
-
 
     //sombra parte chica de arriba
 	mov x0, x20
@@ -632,8 +606,8 @@ main:
     mov x2, 318            	
     mov x3, 44               
     mov x4, 82                
-    movz x5, (DETALLES_AMARILLOS & 0x0000FFFF), lsl 0 
-    movk x5, (DETALLES_AMARILLOS >> 16), lsl 16
+    movz x5, (AMARILLO & 0x0000FFFF), lsl 0 
+    movk x5, (AMARILLO >> 16), lsl 16
     bl dibujar_rectangulo
 
 
@@ -664,8 +638,7 @@ main:
     movk x5, (FONDO >> 16), lsl 16
     bl dibujar_rectangulo
 
-
-    
+   
 // LETRAS ODC 2025
 
     //O
@@ -674,8 +647,8 @@ main:
     mov x2, 325            	    
     mov x3, 20               
     mov x4, 4               
-    movz x5, (DETALLES_AMARILLOS & 0x0000FFFF), lsl 0 
-    movk x5, (DETALLES_AMARILLOS >> 16), lsl 16
+    movz x5, (AMARILLO & 0x0000FFFF), lsl 0 
+    movk x5, (AMARILLO >> 16), lsl 16
     bl dibujar_rectangulo
 
     mov x0, x20
@@ -683,8 +656,8 @@ main:
     mov x2, 330            	    
     mov x3, 5               
     mov x4, 40               
-    movz x5, (DETALLES_AMARILLOS & 0x0000FFFF), lsl 0 
-    movk x5, (DETALLES_AMARILLOS >> 16), lsl 16
+    movz x5, (AMARILLO & 0x0000FFFF), lsl 0 
+    movk x5, (AMARILLO >> 16), lsl 16
     bl dibujar_rectangulo
 
     mov x0, x20
@@ -692,8 +665,8 @@ main:
     mov x2, 330            	    
     mov x3, 5               
     mov x4, 40               
-    movz x5, (DETALLES_AMARILLOS & 0x0000FFFF), lsl 0 
-    movk x5, (DETALLES_AMARILLOS >> 16), lsl 16
+    movz x5, (AMARILLO & 0x0000FFFF), lsl 0 
+    movk x5, (AMARILLO >> 16), lsl 16
     bl dibujar_rectangulo
 
     mov x0, x20
@@ -701,8 +674,8 @@ main:
     mov x2, 370            	    
     mov x3, 20               
     mov x4, 4               
-    movz x5, (DETALLES_AMARILLOS & 0x0000FFFF), lsl 0 
-    movk x5, (DETALLES_AMARILLOS >> 16), lsl 16
+    movz x5, (AMARILLO & 0x0000FFFF), lsl 0 
+    movk x5, (AMARILLO >> 16), lsl 16
     bl dibujar_rectangulo
 
     //D
@@ -712,8 +685,8 @@ main:
     mov x2, 325            	    
     mov x3, 20               
     mov x4, 4               
-    movz x5, (DETALLES_AMARILLOS & 0x0000FFFF), lsl 0 
-    movk x5, (DETALLES_AMARILLOS >> 16), lsl 16
+    movz x5, (AMARILLO & 0x0000FFFF), lsl 0 
+    movk x5, (AMARILLO >> 16), lsl 16
     bl dibujar_rectangulo
 
     mov x0, x20
@@ -721,8 +694,8 @@ main:
     mov x2, 330            	    
     mov x3, 5               
     mov x4, 40               
-    movz x5, (DETALLES_AMARILLOS & 0x0000FFFF), lsl 0 
-    movk x5, (DETALLES_AMARILLOS >> 16), lsl 16
+    movz x5, (AMARILLO & 0x0000FFFF), lsl 0 
+    movk x5, (AMARILLO >> 16), lsl 16
     bl dibujar_rectangulo
 
     mov x0, x20
@@ -730,8 +703,8 @@ main:
     mov x2, 330            	    
     mov x3, 5               
     mov x4, 37               
-    movz x5, (DETALLES_AMARILLOS & 0x0000FFFF), lsl 0 
-    movk x5, (DETALLES_AMARILLOS >> 16), lsl 16
+    movz x5, (AMARILLO & 0x0000FFFF), lsl 0 
+    movk x5, (AMARILLO >> 16), lsl 16
     bl dibujar_rectangulo
 
     mov x0, x20
@@ -739,8 +712,8 @@ main:
     mov x2, 368            	    
     mov x3, 20               
     mov x4, 4               
-    movz x5, (DETALLES_AMARILLOS & 0x0000FFFF), lsl 0 
-    movk x5, (DETALLES_AMARILLOS >> 16), lsl 16
+    movz x5, (AMARILLO & 0x0000FFFF), lsl 0 
+    movk x5, (AMARILLO >> 16), lsl 16
     bl dibujar_rectangulo
 
     //C
@@ -749,8 +722,8 @@ main:
     mov x2, 330            	    
     mov x3, 5               
     mov x4, 40               
-    movz x5, (DETALLES_AMARILLOS & 0x0000FFFF), lsl 0 
-    movk x5, (DETALLES_AMARILLOS >> 16), lsl 16
+    movz x5, (AMARILLO & 0x0000FFFF), lsl 0 
+    movk x5, (AMARILLO >> 16), lsl 16
     bl dibujar_rectangulo
 
     mov x0, x20
@@ -758,8 +731,8 @@ main:
     mov x2, 325            	    
     mov x3, 15               
     mov x4, 4               
-    movz x5, (DETALLES_AMARILLOS & 0x0000FFFF), lsl 0 
-    movk x5, (DETALLES_AMARILLOS >> 16), lsl 16
+    movz x5, (AMARILLO & 0x0000FFFF), lsl 0 
+    movk x5, (AMARILLO >> 16), lsl 16
     bl dibujar_rectangulo
 
     mov x0, x20
@@ -767,8 +740,8 @@ main:
     mov x2, 370            	    
     mov x3, 15               
     mov x4, 4               
-    movz x5, (DETALLES_AMARILLOS & 0x0000FFFF), lsl 0 
-    movk x5, (DETALLES_AMARILLOS >> 16), lsl 16
+    movz x5, (AMARILLO & 0x0000FFFF), lsl 0 
+    movk x5, (AMARILLO >> 16), lsl 16
     bl dibujar_rectangulo
 
     //Numeros 2025
@@ -780,8 +753,8 @@ main:
     mov x2, 390            	    
     mov x3, 18                  
     mov x4, 4                   
-    movz x5, (DETALLES_AMARILLOS & 0x0000FFFF), lsl 0 
-    movk x5, (DETALLES_AMARILLOS >> 16), lsl 16
+    movz x5, (AMARILLO & 0x0000FFFF), lsl 0 
+    movk x5, (AMARILLO >> 16), lsl 16
     bl dibujar_rectangulo
 
 
@@ -790,8 +763,8 @@ main:
     mov x2, 394            	    
     mov x3, 5                  
     mov x4, 10                   
-    movz x5, (DETALLES_AMARILLOS & 0x0000FFFF), lsl 0 
-    movk x5, (DETALLES_AMARILLOS >> 16), lsl 16
+    movz x5, (AMARILLO & 0x0000FFFF), lsl 0 
+    movk x5, (AMARILLO >> 16), lsl 16
     bl dibujar_rectangulo
 
     mov x0, x20
@@ -799,8 +772,8 @@ main:
     mov x2, 404            	    
     mov x3, 18                  
     mov x4, 4                   
-    movz x5, (DETALLES_AMARILLOS & 0x0000FFFF), lsl 0 
-    movk x5, (DETALLES_AMARILLOS >> 16), lsl 16
+    movz x5, (AMARILLO & 0x0000FFFF), lsl 0 
+    movk x5, (AMARILLO >> 16), lsl 16
     bl dibujar_rectangulo
 
     mov x0, x20
@@ -808,8 +781,8 @@ main:
     mov x2, 408            	    
     mov x3, 5                  
     mov x4, 10                   
-    movz x5, (DETALLES_AMARILLOS & 0x0000FFFF), lsl 0 
-    movk x5, (DETALLES_AMARILLOS >> 16), lsl 16
+    movz x5, (AMARILLO & 0x0000FFFF), lsl 0 
+    movk x5, (AMARILLO >> 16), lsl 16
     bl dibujar_rectangulo
 
     
@@ -818,8 +791,8 @@ main:
     mov x2, 415            	    
     mov x3, 18                  
     mov x4, 4                   
-    movz x5, (DETALLES_AMARILLOS & 0x0000FFFF), lsl 0 
-    movk x5, (DETALLES_AMARILLOS >> 16), lsl 16
+    movz x5, (AMARILLO & 0x0000FFFF), lsl 0 
+    movk x5, (AMARILLO >> 16), lsl 16
     bl dibujar_rectangulo
 
     // 0
@@ -932,10 +905,7 @@ main:
     movk x5, (VERDE_CLARO >> 16), lsl 16
     bl dibujar_rectangulo
 
-
-
     //ESTREllAS
-
 
 	mov x0, x20
 	mov x1, 400 
@@ -943,8 +913,8 @@ main:
 	mov x3, 3 
 
 	//Cargamos el color
-	movz x4, (DETALLES_AMARILLOS & 0x0000FFFF), lsl 0
-	movk x4, (DETALLES_AMARILLOS >> 16), lsl 16
+	movz x4, (AMARILLO & 0x0000FFFF), lsl 0
+	movk x4, (AMARILLO >> 16), lsl 16
 	bl dibujar_circulo
 
     mov x0, x20
@@ -971,8 +941,8 @@ main:
 	mov x2, 50
 	mov x3, 3 
 
-	movz x4, (DETALLES_AMARILLOS & 0x0000FFFF), lsl 0
-	movk x4, (DETALLES_AMARILLOS >> 16), lsl 16
+	movz x4, (AMARILLO & 0x0000FFFF), lsl 0
+	movk x4, (AMARILLO >> 16), lsl 16
 	bl dibujar_circulo
 
     mov x0, x20
@@ -990,8 +960,8 @@ main:
 	mov x2, 150
 	mov x3, 3 
 
-	movz x4, (DETALLES_AMARILLOS & 0x0000FFFF), lsl 0
-	movk x4, (DETALLES_AMARILLOS >> 16), lsl 16
+	movz x4, (AMARILLO & 0x0000FFFF), lsl 0
+	movk x4, (AMARILLO >> 16), lsl 16
 	bl dibujar_circulo
 
     mov x0, x20
@@ -1026,8 +996,8 @@ main:
 	mov x2, 30
 	mov x3, 3 
 
-	movz x4, (DETALLES_AMARILLOS & 0x0000FFFF), lsl 0
-	movk x4, (DETALLES_AMARILLOS >> 16), lsl 16
+	movz x4, (AMARILLO & 0x0000FFFF), lsl 0
+	movk x4, (AMARILLO >> 16), lsl 16
 	bl dibujar_circulo
 
     mov x0, x20
@@ -1035,8 +1005,8 @@ main:
 	mov x2, 200
 	mov x3, 3 
 
-	movz x4, (DETALLES_AMARILLOS & 0x0000FFFF), lsl 0
-	movk x4, (DETALLES_AMARILLOS >> 16), lsl 16
+	movz x4, (AMARILLO & 0x0000FFFF), lsl 0
+	movk x4, (AMARILLO >> 16), lsl 16
 	bl dibujar_circulo
 
     mov x0, x20
@@ -1044,8 +1014,8 @@ main:
 	mov x2, 200
 	mov x3, 3 
 
-	movz x4, (DETALLES_AMARILLOS & 0x0000FFFF), lsl 0
-	movk x4, (DETALLES_AMARILLOS >> 16), lsl 16
+	movz x4, (AMARILLO & 0x0000FFFF), lsl 0
+	movk x4, (AMARILLO >> 16), lsl 16
 	bl dibujar_circulo
 
 
