@@ -26,6 +26,22 @@
 .equ CIELO, 0xFFC3D5EC 
 .equ PAJARO, 0xFFFFFFFF
 .equ PICO_PAJARO, 0xFFFFFF00
+.equ FONDO, 0xFF2E003E
+.equ ROSA, 0xFFFF66CC
+.equ ROJO, 0xFFD13438
+.equ AZUL_CLARO, 0xFF2B6CB0
+.equ AZUL, 0xFF000080
+.equ AZUL_OSCURO, 0xFF4682B4
+.equ INDIGO, 0xFF4B0082
+.equ MAGENTA, 0xFF8B008B
+.equ VERDE_CLARO, 0xFF38A169
+.equ VERDE_OCEANO, 0xFF2E8B57
+.equ TURQUESA, 0xFF319795
+.equ AMARILLO, 0xFFECC94B
+.equ AMARILLO_LUZ, 0X00FFFFC5
+.equ SOMBRA_SUELO, 0xFF1A202C
+.equ ESTRUCTURAS_LEJANAS, 0xFF805AD5
+.equ FONDO_OSCURO, 0xFF0D1018
 
 
 
@@ -451,6 +467,7 @@ funcion_delay:
 main:
 	// x0 contiene la direccion base del framebuffer
  	mov x20, x0	// Guarda la dirección base del framebuffer en x20
+
 	//---------------- CODE HERE ------------------------------------
 	
 	//Fondo
@@ -464,7 +481,279 @@ main:
 	bl dibujar_rectangulo
 	
 	
+	//---------INICIO ODC 2025------------------
+		//O
+    	mov x0, x20
+    	mov x1, 502                
+    	mov x2, 45           	    
+    	mov x3, 20               
+    	mov x4, 4               
+    	movz x5, (AMARILLO & 0x0000FFFF), lsl 0 
+    	movk x5, (AMARILLO >> 16), lsl 16
+    	bl dibujar_rectangulo
+
+    	mov x0, x20
+    	mov x1, 500                
+    	mov x2, 50            	    
+    	mov x3, 5               
+    	mov x4, 40               
+    	movz x5, ( AMARILLO & 0x0000FFFF), lsl 0 
+    	movk x5, (AMARILLO >> 16), lsl 16
+    	bl dibujar_rectangulo
+
+    	mov x0, x20
+    	mov x1, 520             
+    	mov x2, 50            	    
+    	mov x3, 5               
+    	mov x4, 40               
+    	movz x5, (AMARILLO & 0x0000FFFF), lsl 0 
+    	movk x5, (AMARILLO >> 16), lsl 16
+    	bl dibujar_rectangulo
+
+    	mov x0, x20
+    	mov x1, 502                
+    	mov x2, 90          	    
+    	mov x3, 20               
+    	mov x4, 4               
+    	movz x5, (AMARILLO & 0x0000FFFF), lsl 0 
+    	movk x5, (AMARILLO >> 16), lsl 16
+    	bl dibujar_rectangulo
+
+    	//D
+
+    	mov x0, x20
+    	mov x1, 535 //mueve en eje x ➡️              
+    	mov x2, 45  //mueve en eje y ⬆️       	    
+    	mov x3, 20  //mueve en eje x ⬅️             
+    	mov x4, 4   //mueve en eje y ⬇️            
+    	movz x5, (AMARILLO & 0x0000FFFF), lsl 0 
+    	movk x5, (AMARILLO >> 16), lsl 16
+    	bl dibujar_rectangulo
+
+    	mov x0, x20
+    	mov x1, 535                
+    	mov x2, 48            	    
+    	mov x3, 5               
+    	mov x4, 45               
+    	movz x5, (AMARILLO & 0x0000FFFF), lsl 0 
+    	movk x5, (AMARILLO >> 16), lsl 16
+    	bl dibujar_rectangulo
+
+
+    	mov x0, x20
+    	mov x1, 555                
+    	mov x2, 49            	    
+    	mov x3, 5               
+    	mov x4, 40               
+    	movz x5, (AMARILLO & 0x0000FFFF), lsl 0 
+    	movk x5, (AMARILLO >> 16), lsl 16
+    	bl dibujar_rectangulo
+    			
+    	mov x0, x20
+    	mov x1, 535                
+    	mov x2, 89            	    
+    	mov x3, 20               
+    	mov x4, 4               
+    	movz x5, (AMARILLO & 0x0000FFFF), lsl 0 
+    	movk x5, (AMARILLO >> 16), lsl 16
+    	bl dibujar_rectangulo
+
+    	//C
+    	mov x0, x20
+    	mov x1, 565 //mueve en eje x ➡️              
+    	mov x2, 45  //mueve en eje y ⬆️       	    
+    	mov x3, 20  //mueve en eje x ⬅️             
+    	mov x4, 4   //mueve en eje y ⬇️            
+    	movz x5, (AMARILLO & 0x0000FFFF), lsl 0 
+    	movk x5, (AMARILLO >> 16), lsl 16
+    	bl dibujar_rectangulo
+
+    	mov x0, x20
+    	mov x1, 565                
+    	mov x2, 48            	    
+    	mov x3, 5               
+    	mov x4, 45               
+    	movz x5, (AMARILLO & 0x0000FFFF), lsl 0 
+    	movk x5, (AMARILLO >> 16), lsl 16
+    	bl dibujar_rectangulo
+
+
+    	mov x0, x20
+    	mov x1, 565                
+    	mov x2, 89            	    
+    	mov x3, 20               
+    	mov x4, 4               
+    	movz x5, (AMARILLO & 0x0000FFFF), lsl 0 
+    	movk x5, (AMARILLO >> 16), lsl 16
+    	bl dibujar_rectangulo
+
+
+    	//2
+
+    	mov x0, x20
+    	mov x1, 502                 
+    	mov x2, 115            	    
+    	mov x3, 18                  
+    	mov x4, 4                   
+    	movz x5, (AMARILLO & 0x0000FFFF), lsl 0 
+    	movk x5, (AMARILLO >> 16), lsl 16
+    	bl dibujar_rectangulo
+
+
+    	mov x0, x20
+    	mov x1, 515                
+    	mov x2, 116           	    
+    	mov x3, 5                  
+    	mov x4, 10                   
+    	movz x5, (AMARILLO & 0x0000FFFF), lsl 0 
+    	movk x5, (AMARILLO >> 16), lsl 16
+    	bl dibujar_rectangulo
+
+    	mov x0, x20
+    	mov x1, 502                 
+    	mov x2, 126            	    
+    	mov x3, 18                  
+    	mov x4, 4                   
+    	movz x5, (AMARILLO & 0x0000FFFF), lsl 0 
+    	movk x5, (AMARILLO >> 16), lsl 16
+    	bl dibujar_rectangulo
+
+    	mov x0, x20
+    	mov x1, 502                
+    	mov x2, 130           	    
+    	mov x3, 5                  
+    	mov x4, 10                   
+    	movz x5, (AMARILLO & 0x0000FFFF), lsl 0 
+    	movk x5, (AMARILLO >> 16), lsl 16
+    	bl dibujar_rectangulo
+
 	
+    	mov x0, x20
+    	mov x1, 502                 
+    	mov x2, 140            	    
+    	mov x3, 18                  
+    	mov x4, 4                   
+    	movz x5, (AMARILLO & 0x0000FFFF), lsl 0 
+    	movk x5, (AMARILLO >> 16), lsl 16
+    	bl dibujar_rectangulo
+
+    	// 0
+
+    	mov x0, x20
+		mov x1, 538 
+		mov x2, 128 
+		mov x3, 15 
+
+		movz x4, (ROSA & 0x0000FFFF), lsl 0
+		movk x4, (ROSA >> 16), lsl 16
+		bl dibujar_circulo
+    	
+		mov x0, x20
+		mov x1, 538 
+		mov x2, 128 
+		mov x3, 11 
+		movz x4, (CIELO & 0x0000FFFF), lsl 0
+		movk x4, (CIELO >> 16), lsl 16
+		bl dibujar_circulo
+
+
+		//2 AZUL
+
+    	mov x0, x20
+    	mov x1, 560                 
+    	mov x2, 115            	    
+    	mov x3, 18                  
+    	mov x4, 4                   
+    	movz x5, (AZUL_CLARO & 0x0000FFFF), lsl 0 
+    	movk x5, (AZUL_CLARO >> 16), lsl 16
+    	bl dibujar_rectangulo
+
+
+    	mov x0, x20
+    	mov x1, 573                
+    	mov x2, 116            	    
+    	mov x3, 5                  
+    	mov x4, 10                   
+    	movz x5, (AZUL_CLARO & 0x0000FFFF), lsl 0 
+    	movk x5, (AZUL_CLARO >> 16), lsl 16
+    	bl dibujar_rectangulo
+
+    	mov x0, x20
+    	mov x1, 560                 
+    	mov x2, 126            	    
+    	mov x3, 18                  
+    	mov x4, 4                   
+    	movz x5, (AZUL_CLARO & 0x0000FFFF), lsl 0 
+    	movk x5, (AZUL_CLARO >> 16), lsl 16
+    	bl dibujar_rectangulo
+
+    	mov x0, x20
+    	mov x1, 560                
+    	mov x2, 130            	    
+    	mov x3, 5                  
+    	mov x4, 10                   
+    	movz x5, (AZUL_CLARO & 0x0000FFFF), lsl 0 
+    	movk x5, (AZUL_CLARO >> 16), lsl 16
+    	bl dibujar_rectangulo
+
+    	mov x0, x20
+    	mov x1, 560                 
+    	mov x2, 140            	    
+    	mov x3, 18                  
+    	mov x4, 4                   
+    	movz x5, (AZUL_CLARO & 0x0000FFFF), lsl 0 
+    	movk x5, (AZUL_CLARO >> 16), lsl 16
+    	bl dibujar_rectangulo
+
+    	
+    	//5
+    	mov x0, x20
+    	mov x1, 583                 
+    	mov x2, 115            	    
+    	mov x3, 18                  
+    	mov x4, 4                   
+    	movz x5, (VERDE_CLARO & 0x0000FFFF), lsl 0 
+    	movk x5, (VERDE_CLARO >> 16), lsl 16
+    	bl dibujar_rectangulo
+
+
+    	mov x0, x20
+    	mov x1, 583                
+    	mov x2, 116            	    
+    	mov x3, 5                  
+    	mov x4, 10                   
+    	movz x5, (VERDE_CLARO & 0x0000FFFF), lsl 0 
+    	movk x5, (VERDE_CLARO >> 16), lsl 16
+    	bl dibujar_rectangulo
+
+    	mov x0, x20
+    	mov x1, 583                 
+    	mov x2, 126            	    
+    	mov x3, 18                  
+    	mov x4, 4                   
+    	movz x5, (VERDE_CLARO & 0x0000FFFF), lsl 0 
+    	movk x5, (VERDE_CLARO >> 16), lsl 16
+    	bl dibujar_rectangulo
+
+    	mov x0, x20
+    	mov x1, 596                
+    	mov x2, 130            	    
+    	mov x3, 5                  
+    	mov x4, 10                   
+    	movz x5, (VERDE_CLARO & 0x0000FFFF), lsl 0 
+    	movk x5, (VERDE_CLARO >> 16), lsl 16
+    	bl dibujar_rectangulo
+
+	
+    	mov x0, x20
+    	mov x1, 582                 
+    	mov x2, 140            	    
+    	mov x3, 18                  
+    	mov x4, 4                   
+    	movz x5, (VERDE_CLARO & 0x0000FFFF), lsl 0 
+    	movk x5, (VERDE_CLARO >> 16), lsl 16
+    	bl dibujar_rectangulo
+//---------FIN ODC 2025------------------
 	
 	//Suelo
 	mov x0, x20
@@ -738,7 +1027,7 @@ main:
 	mov x12, 0
 	mov x13, 0
 	mov x14, 0
-    	
+
     	//Pajaros en movimiento
     	
     	pajaros:
@@ -805,6 +1094,7 @@ main:
     		bl dibujar_rectangulo
 	
 		mov x8, 28000
+		
 		bl funcion_delay
 
 		
@@ -849,6 +1139,7 @@ main:
     		
     		
     		mov x8, 28000
+		
 		bl funcion_delay
 		
 		
@@ -890,9 +1181,11 @@ main:
     		movk x5, (PICO_PAJARO >> 16), lsl 16
     		bl dibujar_rectangulo
     			
-    		mov x8, 28000
-		bl funcion_delay
+    		mov x8, 200
 		
+		bl funcion_delay
+
+			
     	b pajaros
 	
 	
