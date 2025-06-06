@@ -38,7 +38,7 @@
 .equ VERDE_CLARO, 0xFF38A169 //#38A169
 .equ VERDE_OCEANO, 0xFF2E8B57 //#2E8B57
 .equ TURQUESA, 0xFF319795 //#319795
-.equ AMARILLO, 0xFFECC94B //#ECC94B
+.equ AMARILLO, 0xFFECC94B //#ECC94B/
 .equ AMARILLO_LUZ, 0X00FFFFC5 //#FFFFC5
 .equ SOMBRA_SUELO, 0xFF1A202C //#1A202C
 .equ ESTRUCTURAS_LEJANAS, 0xFF805AD5 //#805AD5
@@ -952,7 +952,7 @@ main:
     mov x0, x20
     mov x1, 80     // x_inicio 
    	mov x2, 140                 // y_inicio 
-    mov x3, 40              // ancho 
+    mov x3, 40    // ancho 
     mov x4, 90             // alto 
     movz x5, (HOJAS & 0x0000FFFF), lsl 0	//color
     movk x5, (HOJAS >> 16), lsl 16
