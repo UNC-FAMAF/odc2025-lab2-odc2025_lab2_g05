@@ -1,3 +1,4 @@
+
 //Constantes y definiciones globales
 .equ SCREEN_WIDTH, 640
 .equ SCREEN_HEIGH, 480
@@ -1015,6 +1016,46 @@ main:
 
     //ESTREllAS
 
+    //Estrella fugaz
+    mov x0, x20
+	mov x1, 470 
+	mov x2, 120
+	mov x3, 10 
+
+	movz x4, (TURQUESA & 0x0000FFFF), lsl 0
+	movk x4, (TURQUESA >> 16), lsl 16
+	bl dibujar_circulo
+
+    mov x0, x20
+    mov x1, 480                 
+    mov x2, 118            	    
+    mov x3, 40                  
+    mov x4, 2                   
+    movz x5, (AMARILLO & 0x0000FFFF), lsl 0 
+    movk x5, (AMARILLO >> 16), lsl 16
+    bl dibujar_rectangulo
+
+    mov x0, x20
+    mov x1, 479                 
+    mov x2, 124            	    
+    mov x3, 25                  
+    mov x4, 2                   
+    movz x5, (AMARILLO & 0x0000FFFF), lsl 0 
+    movk x5, (AMARILLO >> 16), lsl 16
+    bl dibujar_rectangulo
+
+    mov x0, x20
+    mov x1, 479                 
+    mov x2, 112            	    
+    mov x3, 19                  
+    mov x4, 2                   
+    movz x5, (AMARILLO & 0x0000FFFF), lsl 0 
+    movk x5, (AMARILLO >> 16), lsl 16
+    bl dibujar_rectangulo
+
+
+
+
 	mov x0, x20
 	mov x1, 400 
 	mov x2, 150 
@@ -1125,6 +1166,9 @@ main:
 	movz x4, (AMARILLO & 0x0000FFFF), lsl 0
 	movk x4, (AMARILLO >> 16), lsl 16
 	bl dibujar_circulo
+
+
+
 
 
 InfLoop:
