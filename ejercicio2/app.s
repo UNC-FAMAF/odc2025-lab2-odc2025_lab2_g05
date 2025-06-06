@@ -9,41 +9,41 @@
 	
 
 //Definicion de colores
-.equ TIERRA, 0xFF999900
-.equ PIEDRITA, 0XFFFFFFFF
-.equ TIERRA_MEDIA, 0XFF807B37
-.equ SOMBRA_TIERRA, 0XFF616422
-.equ PASTO, 0xFF49D18D
-.equ MADERA, 0xFF705321
-.equ SOMBRA_MADERA, 0xFF7C6950
-.equ ESCALERA, 0xFFD5B981
-.equ TECHO, 0xFFEF871F
-.equ HOJAS, 0xFF4FE27B
-.equ HOJAS_OSCURAS, 0xFF338941
-.equ SOMBRA_HOJAS, 0xFF10401A
-.equ FLORES, 0xFFF2B374
-.equ TIERRA_MOJADA, 0xFF5E590F
-.equ CIELO, 0xFFC3D5EC 
-.equ PAJARO, 0xFFFFFFFF
-.equ BLANCO_HOJAS, 0xFFFFFFFF
-.equ PICO_PAJARO, 0xFFFFFF00
-.equ FONDO, 0xFF2E003E
-.equ ROSA, 0xFFFF66CC
-.equ ROJO, 0xFFD13438
-.equ AZUL_CLARO, 0xFF2B6CB0
-.equ AZUL, 0xFF000080
-.equ AZUL_OSCURO, 0xFF4682B4
-.equ INDIGO, 0xFF4B0082
-.equ MAGENTA, 0xFF8B008B
-.equ VERDE_CLARO, 0xFF38A169
-.equ VERDE_OCEANO, 0xFF2E8B57
-.equ TURQUESA, 0xFF319795
-.equ AMARILLO, 0xFFECC94B
-.equ AMARILLO_LUZ, 0X00FFFFC5
-.equ SOMBRA_SUELO, 0xFF1A202C
-.equ ESTRUCTURAS_LEJANAS, 0xFF805AD5
-.equ FONDO_OSCURO, 0xFF0D1018
-.equ NARANJA, 0xFFFFA42D
+.equ TIERRA, 0xFF999900 //#999900
+.equ PIEDRITA, 0xFFFFFFFF //#FFFFFF
+.equ TIERRA_MEDIA, 0xFF807B37 //#807B37
+.equ SOMBRA_TIERRA, 0xFF616422 //#616422
+.equ PASTO, 0xFF49D18D //#49D18D
+.equ MADERA, 0xFF705321 //#705321
+.equ SOMBRA_MADERA, 0xFF7C6950 //#7C6950
+.equ ESCALERA, 0xFFD5B981 //#D5B981
+.equ TECHO, 0xFFEF871F //#EF871F
+.equ HOJAS, 0xFF4FE27B //#4FE27B
+.equ HOJAS_OSCURAS, 0xFF338941 //#338941
+.equ SOMBRA_HOJAS, 0xFF10401A //#10401A
+.equ FLORES, 0xFFF2B374 //#F2B374
+.equ TIERRA_MOJADA, 0xFF5E590F //#5E590F
+.equ CIELO, 0xFFC3D5EC //#C3D5EC 
+.equ PAJARO, 0xFFFFFFFF //#FFFFFF
+.equ BLANCO_HOJAS, 0xFFFFFFFF //#FFFFFF
+.equ PICO_PAJARO, 0xFFFFFF00 //#FFFF00
+.equ FONDO, 0xFF2E003E //#2E003E
+.equ ROSA, 0xFFFF66CC //#FF66CC
+.equ ROJO, 0xFFD13438 //#D13438
+.equ AZUL_CLARO, 0xFF2B6CB0 //#2B6CB0
+.equ AZUL, 0xFF000080 //#000080
+.equ AZUL_OSCURO, 0xFF4682B4 //#4682B4
+.equ INDIGO, 0xFF4B0082 //#4B0082
+.equ MAGENTA, 0xFF8B008B //#8B008B
+.equ VERDE_CLARO, 0xFF38A169 //#38A169
+.equ VERDE_OCEANO, 0xFF2E8B57 //#2E8B57
+.equ TURQUESA, 0xFF319795 //#319795
+.equ AMARILLO, 0xFFECC94B //#ECC94B
+.equ AMARILLO_LUZ, 0X00FFFFC5 //#FFFFC5
+.equ SOMBRA_SUELO, 0xFF1A202C //#1A202C
+.equ ESTRUCTURAS_LEJANAS, 0xFF805AD5 //#805AD5
+.equ FONDO_OSCURO, 0xFF0D1018 //#0D1018
+.equ NARANJA, 0xFFFFA42D //#FFA42D
 
 
 
@@ -1022,7 +1022,8 @@ main:
     		movz x5, (VERDE_CLARO & 0x0000FFFF), lsl 0	
     		movk x5, (VERDE_CLARO >> 16), lsl 16
     		bl dibujar_diagonal_izq
-	//-------------------------------------------------
+	
+		//------------- linea 1 hojas -> blanco ------------------
 			mov x0, x20
     		mov x1, x16 //x16=119
 			//add x1,x1,#5 //NECESITO SUMAR 4 Y RESTAR 4 PARA EL MOVIMIENTO 
@@ -1033,7 +1034,7 @@ main:
     		movz x5, (BLANCO_HOJAS & 0x0000FFFF), lsl 0	
     		movk x5, (BLANCO_HOJAS >> 16), lsl 16
     		bl dibujar_diagonal_der
-		//------------- linea 10 hojas -> verde ------------------
+		//------------- linea 1 hojas -> verde ------------------
     		mov x0, x20
     		mov x1, x16 //x16=131
 			//add x1,x1,#5 //x16=119+12
@@ -1075,6 +1076,8 @@ main:
     		movz x5, (VERDE_CLARO & 0x0000FFFF), lsl 0	
     		movk x5, (VERDE_CLARO >> 16), lsl 16
     		bl dibujar_diagonal_izq
+		
+		//------------- linea 2 hojas -> blanco ------------------
 			mov x0, x20
     		mov x1, x16 //x16=119
 			//add x1,x1,#5 //NECESITO SUMAR 4 Y RESTAR 4 PARA EL MOVIMIENTO 
@@ -1085,7 +1088,7 @@ main:
     		movz x5, (BLANCO_HOJAS & 0x0000FFFF), lsl 0	
     		movk x5, (BLANCO_HOJAS >> 16), lsl 16
     		bl dibujar_diagonal_der
-		//------------- linea 10 hojas -> verde ------------------
+		//------------- linea 2 hojas -> verde ------------------
     		mov x0, x20
     		mov x1, x16 //x16=131
 			//add x1,x1,#5 //x16=119+12
@@ -1125,6 +1128,7 @@ main:
     		movk x5, (VERDE_CLARO >> 16), lsl 16
     		bl dibujar_diagonal_izq
 			
+		//------------- linea 3 hojas -> blanco ------------------
 			mov x0, x20
     		mov x1, x16 //x16=119
 			//add x1,x1,#5 //NECESITO SUMAR 4 Y RESTAR 4 PARA EL MOVIMIENTO 
@@ -1135,7 +1139,7 @@ main:
     		movz x5, (BLANCO_HOJAS & 0x0000FFFF), lsl 0	
     		movk x5, (BLANCO_HOJAS >> 16), lsl 16
     		bl dibujar_diagonal_der
-		//------------- linea 10 hojas -> verde ------------------
+		//------------- linea 3 hojas -> verde ------------------
     		mov x0, x20
     		mov x1, x16 //x16=131
 			//add x1,x1,#5 //x16=119+12
@@ -1270,7 +1274,7 @@ main:
     		movk x5, (VERDE_CLARO >> 16), lsl 16
     		bl dibujar_diagonal_der
 
-		//------------- linea 8 hojas -> blanco ------------------
+		//------------- linea 6 hojas -> blanco ------------------
 			mov x0, x20
     		mov x1, x16 //x16=119
 			add x1,x1,#110 //NECESITO SUMAR 4 Y RESTAR 4 PARA EL MOVIMIENTO 
@@ -1281,7 +1285,7 @@ main:
     		movz x5, (BLANCO_HOJAS & 0x0000FFFF), lsl 0	
     		movk x5, (BLANCO_HOJAS >> 16), lsl 16
     		bl dibujar_diagonal_izq
-		//------------- linea 8 hojas -> verde ------------------
+		//------------- linea 6 hojas -> verde ------------------
     		mov x0, x20
     		mov x1, x16 //x16=131
 			add x1,x1,#110 //x16=119+12
@@ -1293,8 +1297,8 @@ main:
     		movk x5, (VERDE_CLARO >> 16), lsl 16
     		bl dibujar_diagonal_izq
 
-
 	// --- FIN HOJAS LINEA 6 ---------
+
 	// ------ HOJAS LINEA 7 ---------
 		//------------- linea 7 hojas -> blanco ------------------
     		mov x0, x20
@@ -1319,7 +1323,7 @@ main:
     		movk x5, (VERDE_CLARO >> 16), lsl 16
     		bl dibujar_diagonal_der
 
-			//------------- linea 9 hojas -> blanco ------------------
+			//------------- linea 7 hojas -> blanco ------------------
     		mov x0, x20
     		mov x1, x16 //x16=119
 			add x1,x1,#110 //NECESITO SUMAR 4 Y RESTAR 4 PARA EL MOVIMIENTO 
@@ -1330,7 +1334,7 @@ main:
     		movz x5, (BLANCO_HOJAS & 0x0000FFFF), lsl 0	
     		movk x5, (BLANCO_HOJAS >> 16), lsl 16
     		bl dibujar_diagonal_izq
-		//------------- linea 9 hojas -> verde ------------------
+		//------------- linea 7 hojas -> verde ------------------
     		mov x0, x20
     		mov x1, x16 //x16=131
 			add x1,x1,#110 //x16=119+12
@@ -1342,12 +1346,154 @@ main:
     		movk x5, (VERDE_CLARO >> 16), lsl 16
     		bl dibujar_diagonal_izq
 
-		
 	// --- FIN HOJAS LINEA 7 ---------
 
+	// ------ HOJAS LINEA 8 ---------
+		//------------- linea 8 hojas -> blanco ------------------
+    		mov x0, x20
+    		mov x1, x16 //x16=119
+			add x1,x1,#215 //NECESITO SUMAR 4 Y RESTAR 4 PARA EL MOVIMIENTO 
+   			mov x2, 115                       
+			//add x2, x2, #15    
+    		mov x3, 4               
+    		mov x4, 5              
+    		movz x5, (BLANCO_HOJAS & 0x0000FFFF), lsl 0	
+    		movk x5, (BLANCO_HOJAS >> 16), lsl 16
+    		bl dibujar_diagonal_der
+		//------------- linea 8 hojas -> verde ------------------
+    		mov x0, x20
+    		mov x1, x16 //x16=131
+			add x1,x1,#215 //x16=119+12
+   			mov x2, 115                    
+			//add x2, x2, #15    
+    		mov x3, 4               
+    		mov x4, 5              
+    		movz x5, (VERDE_CLARO & 0x0000FFFF), lsl 0	
+    		movk x5, (VERDE_CLARO >> 16), lsl 16
+    		bl dibujar_diagonal_der
+
+			//------------- linea 8 hojas -> blanco ------------------
+    		mov x0, x20
+    		mov x1, x16 //x16=119
+			add x1,x1,#215 //NECESITO SUMAR 4 Y RESTAR 4 PARA EL MOVIMIENTO 
+   			mov x2, 115                       
+			//add x2, x2, #15    
+    		mov x3, 4               
+    		mov x4, 5              
+    		movz x5, (BLANCO_HOJAS & 0x0000FFFF), lsl 0	
+    		movk x5, (BLANCO_HOJAS >> 16), lsl 16
+    		bl dibujar_diagonal_izq
+		//------------- linea 8 hojas -> verde ------------------
+    		mov x0, x20
+    		mov x1, x16 //x16=131
+			add x1,x1,#215 //x16=119+12
+   			mov x2, 115                       
+			//add x2, x2, #15    
+    		mov x3, 4               
+    		mov x4, 5              
+    		movz x5, (VERDE_CLARO & 0x0000FFFF), lsl 0	
+    		movk x5, (VERDE_CLARO >> 16), lsl 16
+    		bl dibujar_diagonal_izq
+
+	// --- FIN HOJAS LINEA 8 ---------
+	// ------ HOJAS LINEA 9 ---------
+		//------------- linea 9 hojas -> blanco ------------------
+    		mov x0, x20
+    		mov x1, x16 //x16=119
+			add x1,x1,#215 //NECESITO SUMAR 4 Y RESTAR 4 PARA EL MOVIMIENTO 
+   			mov x2, 145                       
+			//add x2, x2, #15    
+    		mov x3, 4               
+    		mov x4, 5              
+    		movz x5, (BLANCO_HOJAS & 0x0000FFFF), lsl 0	
+    		movk x5, (BLANCO_HOJAS >> 16), lsl 16
+    		bl dibujar_diagonal_der
+		//------------- linea 9 hojas -> verde ------------------
+    		mov x0, x20
+    		mov x1, x16 //x16=131
+			add x1,x1,#215 //x16=119+12
+   			mov x2, 145                    
+			//add x2, x2, #15    
+    		mov x3, 4               
+    		mov x4, 5              
+    		movz x5, (VERDE_CLARO & 0x0000FFFF), lsl 0	
+    		movk x5, (VERDE_CLARO >> 16), lsl 16
+    		bl dibujar_diagonal_der
+
+			//------------- linea 9 hojas -> blanco ------------------
+    		mov x0, x20
+    		mov x1, x16 //x16=119
+			add x1,x1,#215 //NECESITO SUMAR 4 Y RESTAR 4 PARA EL MOVIMIENTO 
+   			mov x2, 145                       
+			//add x2, x2, #15    
+    		mov x3, 4               
+    		mov x4, 5              
+    		movz x5, (BLANCO_HOJAS & 0x0000FFFF), lsl 0	
+    		movk x5, (BLANCO_HOJAS >> 16), lsl 16
+    		bl dibujar_diagonal_izq
+		//------------- linea 9 hojas -> verde ------------------
+    		mov x0, x20
+    		mov x1, x16 //x16=131
+			add x1,x1,#215 //x16=119+12
+   			mov x2, 145                       
+			//add x2, x2, #15    
+    		mov x3, 4               
+    		mov x4, 5              
+    		movz x5, (VERDE_CLARO & 0x0000FFFF), lsl 0	
+    		movk x5, (VERDE_CLARO >> 16), lsl 16
+    		bl dibujar_diagonal_izq
+
+	// --- FIN HOJAS LINEA 9 ---------
+	// ------ HOJAS LINEA 10 ---------
+		//------------- linea 10 hojas -> blanco ------------------
+    		mov x0, x20
+    		mov x1, x16 //x16=119
+			add x1,x1,#215 //NECESITO SUMAR 4 Y RESTAR 4 PARA EL MOVIMIENTO 
+   			mov x2, 180                       
+			//add x2, x2, #15    
+    		mov x3, 4               
+    		mov x4, 5              
+    		movz x5, (BLANCO_HOJAS & 0x0000FFFF), lsl 0	
+    		movk x5, (BLANCO_HOJAS >> 16), lsl 16
+    		bl dibujar_diagonal_der
+		//------------- linea 10 hojas -> verde ------------------
+    		mov x0, x20
+    		mov x1, x16 //x16=131
+			add x1,x1,#215 //x16=119+12
+   			mov x2, 180                    
+			//add x2, x2, #15    
+    		mov x3, 4               
+    		mov x4, 5              
+    		movz x5, (VERDE_CLARO & 0x0000FFFF), lsl 0	
+    		movk x5, (VERDE_CLARO >> 16), lsl 16
+    		bl dibujar_diagonal_der
+
+			//------------- linea 10 hojas -> blanco ------------------
+    		mov x0, x20
+    		mov x1, x16 //x16=119
+			add x1,x1,#215 //NECESITO SUMAR 4 Y RESTAR 4 PARA EL MOVIMIENTO 
+   			mov x2, 180                       
+			//add x2, x2, #15    
+    		mov x3, 4               
+    		mov x4, 5              
+    		movz x5, (BLANCO_HOJAS & 0x0000FFFF), lsl 0	
+    		movk x5, (BLANCO_HOJAS >> 16), lsl 16
+    		bl dibujar_diagonal_izq
+		//------------- linea 10 hojas -> verde ------------------
+    		mov x0, x20
+    		mov x1, x16 //x16=131
+			add x1,x1,#215 //x16=119+12
+   			mov x2, 180                       
+			//add x2, x2, #15    
+    		mov x3, 4               
+    		mov x4, 5              
+    		movz x5, (VERDE_CLARO & 0x0000FFFF), lsl 0	
+    		movk x5, (VERDE_CLARO >> 16), lsl 16
+    		bl dibujar_diagonal_izq
+
+	// --- FIN HOJAS LINEA 10 ---------
+
 	
-
-
 	
 	// -------- condicionales del bucle hojas --------------------
     	add x14, x14, 1
