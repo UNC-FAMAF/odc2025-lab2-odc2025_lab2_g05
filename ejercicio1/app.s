@@ -1053,9 +1053,6 @@ main:
     movk x5, (AMARILLO >> 16), lsl 16
     bl dibujar_rectangulo
 
-
-
-
 	mov x0, x20
 	mov x1, 400 
 	mov x2, 150 
@@ -1083,6 +1080,121 @@ main:
 
 	movz x4, (ROSA & 0x0000FFFF), lsl 0
 	movk x4, (ROSA >> 16), lsl 16
+	bl dibujar_circulo
+
+
+    mov x0, x20
+	mov x1, 580 
+	mov x2, 100
+	mov x3, 2 
+
+	movz x4, (ROSA & 0x0000FFFF), lsl 0
+	movk x4, (ROSA >> 16), lsl 16
+	bl dibujar_circulo
+
+
+    mov x0, x20
+	mov x1, 580 
+	mov x2, 150
+	mov x3, 7 
+
+	movz x4, (VERDE_OCEANO & 0x0000FFFF), lsl 0
+	movk x4, (VERDE_OCEANO >> 16), lsl 16
+	bl dibujar_circulo
+
+
+    mov x0, x20
+	mov x1, 380 
+	mov x2, 100
+	mov x3, 3 
+
+	movz x4, (ROSA & 0x0000FFFF), lsl 0
+	movk x4, (ROSA >> 16), lsl 16
+	bl dibujar_circulo
+
+    mov x0, x20
+	mov x1, 310 
+	mov x2, 100
+	mov x3, 3 
+
+	movz x4, (AMARILLO & 0x0000FFFF), lsl 0
+	movk x4, (AMARILLO >> 16), lsl 16
+	bl dibujar_circulo
+
+    mov x0, x20
+	mov x1, 210 
+	mov x2, 180
+	mov x3, 3 
+
+	movz x4, (ROSA & 0x0000FFFF), lsl 0
+	movk x4, (ROSA >> 16), lsl 16
+	bl dibujar_circulo
+
+    mov x0, x20
+	mov x1, 380 
+	mov x2, 200
+	mov x3, 3 
+
+	movz x4, (ROSA & 0x0000FFFF), lsl 0
+	movk x4, (ROSA >> 16), lsl 16
+	bl dibujar_circulo
+
+    
+    mov x0, x20
+	mov x1, 40 
+	mov x2, 200
+	mov x3, 10 
+
+	movz x4, (AZUL_CLARO & 0x0000FFFF), lsl 0
+	movk x4, (AZUL_CLARO >> 16), lsl 16
+	bl dibujar_circulo
+
+     
+    mov x0, x20
+	mov x1, 40 
+	mov x2, 20
+	mov x3, 3 
+
+	movz x4, (ROSA & 0x0000FFFF), lsl 0
+	movk x4, (ROSA >> 16), lsl 16
+	bl dibujar_circulo
+
+    mov x0, x20
+	mov x1, 180 
+	mov x2, 20
+	mov x3, 3 
+
+	movz x4, (ROSA & 0x0000FFFF), lsl 0
+	movk x4, (ROSA >> 16), lsl 16
+	bl dibujar_circulo
+
+    
+    mov x0, x20
+	mov x1, 130 
+	mov x2, 20
+	mov x3, 3 
+
+	movz x4, (AMARILLO & 0x0000FFFF), lsl 0
+	movk x4, (AMARILLO >> 16), lsl 16
+	bl dibujar_circulo
+
+    mov x0, x20
+	mov x1, 280 
+	mov x2, 20
+	mov x3, 3 
+
+	movz x4, (AMARILLO & 0x0000FFFF), lsl 0
+	movk x4, (AMARILLO >> 16), lsl 16
+	bl dibujar_circulo
+
+    
+    mov x0, x20
+	mov x1, 480 
+	mov x2, 20
+	mov x3, 3 
+
+	movz x4, (AMARILLO & 0x0000FFFF), lsl 0
+	movk x4, (AMARILLO >> 16), lsl 16
 	bl dibujar_circulo
 
     mov x0, x20
@@ -1166,9 +1278,6 @@ main:
 	movz x4, (AMARILLO & 0x0000FFFF), lsl 0
 	movk x4, (AMARILLO >> 16), lsl 16
 	bl dibujar_circulo
-
-
-
 
 
 InfLoop:
