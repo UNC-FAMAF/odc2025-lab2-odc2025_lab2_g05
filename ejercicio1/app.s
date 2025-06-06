@@ -16,10 +16,12 @@
 .equ VERDE_OCEANO, 0xFF2E8B57
 .equ TURQUESA, 0xFF319795
 .equ AMARILLO, 0xFFECC94B
+.equ AMARILLO_OSCURO, 0xFFE49B0F 
 .equ AMARILLO_LUZ, 0X00FFFFC5
 .equ SOMBRA_SUELO, 0xFF1A202C
 .equ ESTRUCTURAS_LEJANAS, 0xFF805AD5
 .equ FONDO_OSCURO, 0xFF0D1018
+
 
 //x0 = Direccion base del framebuffer (memoria de la pantalla)
 //x1 = Coordenada X del pixel a dibujar
@@ -541,7 +543,6 @@ main:
     mov x4, 4
     mov x5, 357 // x_final
     mov x6, 400 // y_final
-
     bl dibujar_ventanas
 
     // Dibujar ventanas edificio principal parte chica arriba
@@ -552,18 +553,27 @@ main:
     mov x4, 4
     mov x5, 342 // x_final
     mov x6, 210 // y_final
-
     bl dibujar_ventanas
 
     // Sombra edificio verde de la derecha
     mov x0, x20
-    mov x1, 400                
+    mov x1, 402                
     mov x2, 270             	
-    mov x3, 60               
+    mov x3, 57               
     mov x4, 140                
     movz x5, (0x00 & 0x0000FFFF), lsl 0 
     movk x5, (0x00 >> 16), lsl 16
     bl dibujar_rectangulo
+
+    mov x0, x20
+    mov x1, 402                
+    mov x2, 245                 
+    mov x3, 42               
+    mov x4, 40                
+    movz x5, (0x00 & 0x0000FFFF), lsl 0 
+    movk x5, (0x00 >> 16), lsl 16
+    bl dibujar_rectangulo
+
 
     //Edificio verde de la derecha
     mov x0, x20
@@ -578,21 +588,32 @@ main:
     mov x0, x20
     mov x1, 408                
     mov x2, 250             	
-    mov x3, 30               
+    mov x3, 32               
     mov x4, 130               
     movz x5, (VERDE_CLARO & 0x0000FFFF), lsl 0 
     movk x5, (VERDE_CLARO >> 16), lsl 16
     bl dibujar_rectangulo
 
-    mov x0, x20
-    mov x1, 430                
-    mov x2, 285             	
-    mov x3, 13               
-    mov x4, 118               
-    movz x5, (VERDE_OCEANO & 0x0000FFFF), lsl 0 
-    movk x5, (VERDE_OCEANO >> 16), lsl 16
-    bl dibujar_rectangulo
+    // Dibujar ventanas edificio verde de la derecha
+    mov x0, x20 // framebuffer
+    mov x1, 414 // x_inicio
+    mov x2, 282 // y_inicio
+    mov x3, 3 
+    mov x4, 3
+    mov x5, 450 // x_final
+    mov x6, 395 // y_final
+    bl dibujar_ventanas
 
+    mov x0, x20 // framebuffer
+    mov x1, 414 // x_inicio
+    mov x2, 254 // y_inicio
+    mov x3, 3 
+    mov x4, 3
+    mov x5, 435 // x_final
+    mov x6, 280 // y_final
+    bl dibujar_ventanas
+
+    // Edificio indigo
     mov x0, x20
     mov x1, 360                
     mov x2, 350             	
@@ -611,6 +632,16 @@ main:
     movk x5, (INDIGO >> 16), lsl 16
     bl dibujar_rectangulo
 
+    mov x0, x20 // framebuffer
+    mov x1, 373 // x_inicio
+    mov x2, 361 // y_inicio
+    mov x3, 7 
+    mov x4, 2
+    mov x5, 400 // x_final
+    mov x6, 395 // y_final
+    bl dibujar_ventanas
+
+    // Edificio azul
     mov x0, x20
     mov x1, 280                
     mov x2, 270            	
@@ -628,7 +659,9 @@ main:
     movz x5, (AZUL & 0x0000FFFF), lsl 0 
     movk x5, (AZUL >> 16), lsl 16
     bl dibujar_rectangulo
+    
 
+    /// Edificio rojo
     mov x0, x20
     mov x1, 170                
     mov x2, 274            	
@@ -647,6 +680,17 @@ main:
     movk x5, (ROJO >> 16), lsl 16
     bl dibujar_rectangulo
 
+    mov x0, x20 // framebuffer
+    mov x1, 178 // x_inicio
+    mov x2, 285 // y_inicio
+    mov x3, 4 
+    mov x4, 4
+    mov x5, 223 // x_final
+    mov x6, 390 // y_final
+    bl dibujar_ventanas
+
+
+    // Edificio amarillo
     mov x0, x20
     mov x1, 120                
     mov x2, 308            	
@@ -661,10 +705,18 @@ main:
     mov x2, 318            	
     mov x3, 44               
     mov x4, 82                
-    movz x5, (AMARILLO & 0x0000FFFF), lsl 0 
-    movk x5, (AMARILLO >> 16), lsl 16
+    movz x5, (AMARILLO_OSCURO & 0x0000FFFF), lsl 0 
+    movk x5, (AMARILLO_OSCURO >> 16), lsl 16
     bl dibujar_rectangulo
 
+    mov x0, x20 // framebuffer
+    mov x1, 130 // x_inicio
+    mov x2, 321 // y_inicio
+    mov x3, 3 
+    mov x4, 3
+    mov x5, 166 // x_final
+    mov x6, 385 // y_final
+    bl dibujar_ventanas
 
     mov x0, x20
     mov x1, 60                
@@ -684,14 +736,15 @@ main:
     movk x5, (MAGENTA >> 16), lsl 16
     bl dibujar_rectangulo
 
-    mov x0, x20
-    mov x1, 100             
-    mov x2, 290            	
-    mov x3, 10               
-    mov x4, 100               
-    movz x5, (FONDO & 0x0000FFFF), lsl 0 
-    movk x5, (FONDO >> 16), lsl 16
-    bl dibujar_rectangulo
+    mov x0, x20 // framebuffer
+    mov x1, 69 // x_inicio
+    mov x2, 263 // y_inicio
+    mov x3, 3 
+    mov x4, 3
+    mov x5, 110 // x_final
+    mov x6, 390 // y_final
+    bl dibujar_ventanas
+
 
    
 // LETRAS ODC 2025
