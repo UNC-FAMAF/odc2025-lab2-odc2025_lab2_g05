@@ -938,16 +938,25 @@ main:
 //-------------------------------------- HOJAS DEL ARBOL ------------------------------------------------------------
 	mov x12, 0 //contador
 	mov x13, 110 //y_inicio
-	mov x14, 120 //x_inicio
-	//mov x15, 160 // y_inicio
+	mov x14, 90 //x_inicio_izq
+	mov x15, 120 //x_inicio_der
+	
 
 	hojas:
+	//---------INICiO importante:-----------------------
+		//x1=x_inicio
+		//x2=y_inicio
+		//x3=ancho   
+		//x4=alto    
+	//---------FIN importante:-----------------------
+	
+	//------------- linea 2 arbol ------------------
 		mov x0, x20
-    	mov x1, x14    //x_inicio  
-		add x1, x1, #20
-   		mov x2, 100    //y_inicio              
-    	mov x3, 6      //ancho         
-    	mov x4, 6      //alto        
+    	mov x1, x14      
+		add x1, x1, #5
+   		mov x2, 100                 
+		mov x3, 6              
+    	mov x4, 6             
     	movz x5, (HOJAS_OSCURAS & 0x0000FFFF), lsl 0	
     	movk x5, (HOJAS_OSCURAS >> 16), lsl 16
     	bl dibujar_diagonal_izq
@@ -961,80 +970,100 @@ main:
     	movz x5, (HOJAS_OSCURAS & 0x0000FFFF), lsl 0	
     	movk x5, (HOJAS_OSCURAS >> 16), lsl 16
     	bl dibujar_diagonal_der
-    	
+	
+	//------------- linea 1 arbol ------------------
 		mov x0, x20
-    	mov x1, x14      
-   		mov x2, 140                  
-    	mov x3, 6               
-    	mov x4, 6              
-    	movz x5, (HOJAS_OSCURAS & 0x0000FFFF), lsl 0	
-    	movk x5, (HOJAS_OSCURAS >> 16), lsl 16
-    	bl dibujar_diagonal_der
-    	
-    	mov x0, x20
-    	mov x1, x14      
-   		mov x2, 150                  
-    	mov x3, 6               
-    	mov x4, 6              
-    	movz x5, (HOJAS_OSCURAS & 0x0000FFFF), lsl 0	
-    	movk x5, (HOJAS_OSCURAS >> 16), lsl 16
-    	bl dibujar_diagonal_der
-    	
-    	
-    	mov x0, x20
-    	mov x1, x14      
-   		mov x2, 160                  
-    	mov x3, 6               
+    	mov x1, x15      
+   		mov x2, 200                 
+    	mov x3, 6              
     	mov x4, 6              
     	movz x5, (HOJAS_OSCURAS & 0x0000FFFF), lsl 0	
     	movk x5, (HOJAS_OSCURAS >> 16), lsl 16
     	bl dibujar_diagonal_izq
     	
     	mov x0, x20
-    	mov x1, x14      
-   		mov x2, 170                  
+    	mov x1, x14
+   		mov x2, 200                  
     	mov x3, 6               
     	mov x4, 6              
-    	movz x5, (HOJAS_OSCURAS & 0x0000FFFF), lsl 0	
-    	movk x5, (HOJAS_OSCURAS >> 16), lsl 16
-    	bl dibujar_diagonal_izq
-    	    	mov x0, x20
-    	mov x1, x14      
-   		mov x2, 180                  
-    	mov x3, 6               
-    	mov x4, 6              
-    	movz x5, (HOJAS_OSCURAS & 0x0000FFFF), lsl 0	
-    	movk x5, (HOJAS_OSCURAS >> 16), lsl 16
+    	movz x5, (ROJO & 0x0000FFFF), lsl 0	
+    	movk x5, (ROJO >> 16), lsl 16
     	bl dibujar_diagonal_der
-    	
-    	mov x0, x20
-    	mov x1, x14      
-   		mov x2, 190                  
-    	mov x3, 6               
-    	mov x4, 6              
-    	movz x5, (HOJAS_OSCURAS & 0x0000FFFF), lsl 0	
-    	movk x5, (HOJAS_OSCURAS >> 16), lsl 16
-    	bl dibujar_diagonal_der
-    	
-    	
-    	
-    	mov x0, x20
-    	mov x1, 110      
-   		mov x2, x13                  
-    	mov x3, 6               
-    	mov x4, 6              
-    	movz x5, (SOMBRA_HOJAS & 0x0000FFFF), lsl 0	
-    	movk x5, (SOMBRA_HOJAS >> 16), lsl 16
-    	bl dibujar_diagonal_izq
-		
-    	mov x0, x20
-    	mov x1, x14      
-   		mov x2, 210                  
-    	mov x3, 6               
-    	mov x4, 6              
-    	movz x5, (SOMBRA_HOJAS & 0x0000FFFF), lsl 0	
-    	movk x5, (SOMBRA_HOJAS >> 16), lsl 16
-    	bl dibujar_diagonal_der
+    	//----------------------------------------------------------------------------
+
+		//mov x0, x20
+    	//mov x1, x14      
+   		//mov x2, 140                  
+    	//mov x3, 6               
+    	//mov x4, 6              
+    	//movz x5, (HOJAS_OSCURAS & 0x0000FFFF), lsl 0	
+    	//movk x5, (HOJAS_OSCURAS >> 16), lsl 16
+    	//bl dibujar_diagonal_der
+    	//
+    	//mov x0, x20
+    	//mov x1, x14      
+   		//mov x2, 150                  
+    	//mov x3, 6               
+    	//mov x4, 6              
+    	//movz x5, (HOJAS_OSCURAS & 0x0000FFFF), lsl 0	
+    	//movk x5, (HOJAS_OSCURAS >> 16), lsl 16
+    	//bl dibujar_diagonal_der
+    	//
+    	//
+    	//mov x0, x20
+    	//mov x1, x14      
+   		//mov x2, 160                  
+    	//mov x3, 6               
+    	//mov x4, 6              
+    	//movz x5, (HOJAS_OSCURAS & 0x0000FFFF), lsl 0	
+    	//movk x5, (HOJAS_OSCURAS >> 16), lsl 16
+    	//bl dibujar_diagonal_izq
+    	//
+    	//mov x0, x20
+    	//mov x1, x14      
+   		//mov x2, 170                  
+    	//mov x3, 6               
+    	//mov x4, 6              
+    	//movz x5, (HOJAS_OSCURAS & 0x0000FFFF), lsl 0	
+    	//movk x5, (HOJAS_OSCURAS >> 16), lsl 16
+    	//bl dibujar_diagonal_izq
+    	//    	mov x0, x20
+    	//mov x1, x14      
+   		//mov x2, 180                  
+    	//mov x3, 6               
+    	//mov x4, 6              
+    	//movz x5, (HOJAS_OSCURAS & 0x0000FFFF), lsl 0	
+    	//movk x5, (HOJAS_OSCURAS >> 16), lsl 16
+    	//bl dibujar_diagonal_der
+    	//
+    	//mov x0, x20
+    	//mov x1, x14      
+   		//mov x2, 190                  
+    	//mov x3, 6               
+    	//mov x4, 6              
+    	//movz x5, (HOJAS_OSCURAS & 0x0000FFFF), lsl 0	
+    	//movk x5, (HOJAS_OSCURAS >> 16), lsl 16
+    	//bl dibujar_diagonal_der
+    	//
+    	//
+    	//
+    	//mov x0, x20
+    	//mov x1, 110      
+   		//mov x2, x13                  
+    	//mov x3, 6               
+    	//mov x4, 6              
+    	//movz x5, (SOMBRA_HOJAS & 0x0000FFFF), lsl 0	
+    	//movk x5, (SOMBRA_HOJAS >> 16), lsl 16
+    	//bl dibujar_diagonal_izq
+		//
+    	//mov x0, x20
+    	//mov x1, x14      
+   		//mov x2, 210                  
+    	//mov x3, 6               
+    	//mov x4, 6              
+    	//movz x5, (SOMBRA_HOJAS & 0x0000FFFF), lsl 0	
+    	//movk x5, (SOMBRA_HOJAS >> 16), lsl 16
+    	//bl dibujar_diagonal_der
     //-------------- ADD PARA QUE SE MUEVA ---------------------------
     	add x15, x15, 8
     	add x14, x14, 8
