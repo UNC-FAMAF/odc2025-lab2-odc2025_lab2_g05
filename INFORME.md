@@ -2,7 +2,7 @@ Nombre y apellido
 Integrante 1: Julio Correa 191186325
 Integrante 2: Franco Sayago 46309637
 Integrante 3: Franco Toledo 45089238
-Integrante 4: Manuel Gonzalez
+Integrante 4: Manuel Gonzalez 39494891
 
 Descripción ejercicio 1: Consiste en el dibujo de una ciudad en un planeta extrano para ello, se implementan y utilizan rutinas para pintar pixeles, rectangulos y circulos, construyendo elementos como el cielo, edificios, estrellas, ventanas, la luna y texto.
 
