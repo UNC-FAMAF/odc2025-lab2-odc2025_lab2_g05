@@ -482,7 +482,7 @@ main:
 	movk x5, (CIELO >> 16), lsl 16
 	bl dibujar_rectangulo
 	
-	
+
 	//---------INICIO ODC 2025------------------
 		//O
     	mov x0, x20 //mueve en eje x ➡️
@@ -759,223 +759,223 @@ main:
 	
 	//Suelo
 	mov x0, x20
-    	mov x1, 200      
+    mov x1, 200      
    	mov x2, 415                  
-    	mov x3, 240               
-    	mov x4, 17              
-    	movz x5, (TIERRA_MOJADA & 0x0000FFFF), lsl 0	
-    	movk x5, (TIERRA_MOJADA >> 16), lsl 16
-    	bl dibujar_rectangulo
-    	
+    mov x3, 240               
+    mov x4, 17              
+    movz x5, (TIERRA_MOJADA & 0x0000FFFF), lsl 0	
+    movk x5, (TIERRA_MOJADA >> 16), lsl 16
+    bl dibujar_rectangulo
+    
 	mov x0, x20
-    	mov x1, 150      
+    mov x1, 150      
    	mov x2, 410                  
-    	mov x3, 340               
-    	mov x4, 18              
-    	movz x5, (TIERRA_MOJADA & 0x0000FFFF), lsl 0	
-    	movk x5, (TIERRA_MOJADA >> 16), lsl 16
-    	bl dibujar_rectangulo
+    mov x3, 340               
+    mov x4, 18              
+    movz x5, (TIERRA_MOJADA & 0x0000FFFF), lsl 0	
+    movk x5, (TIERRA_MOJADA >> 16), lsl 16
+    bl dibujar_rectangulo
     	
 	mov x0, x20
-    	mov x1, 100      
+    mov x1, 100      
    	mov x2, 400                  
-    	mov x3, 440               
-    	mov x4, 19              
-    	movz x5, (TIERRA_MEDIA & 0x0000FFFF), lsl 0	
-    	movk x5, (TIERRA_MEDIA >> 16), lsl 16
-    	bl dibujar_rectangulo
+    mov x3, 440               
+    mov x4, 19              
+    movz x5, (TIERRA_MEDIA & 0x0000FFFF), lsl 0	
+    movk x5, (TIERRA_MEDIA >> 16), lsl 16
+    bl dibujar_rectangulo
 	
 	mov x0, x20
-    	mov x1, 90      
+    mov x1, 90      
    	mov x2, 390                  
-    	mov x3, 470              
-    	mov x4, 17               
-    	movz x5, (TIERRA & 0x0000FFFF), lsl 0 	
-    	movk x5, (TIERRA >> 16), lsl 16
-    	bl dibujar_rectangulo
+    mov x3, 470              
+    mov x4, 17               
+    movz x5, (TIERRA & 0x0000FFFF), lsl 0 	
+    movk x5, (TIERRA >> 16), lsl 16
+    bl dibujar_rectangulo
 	
 	mov x0, x20
-    	mov x1, 80      
+    mov x1, 80      
    	mov x2, 385                  
-    	mov x3, 490               
-    	mov x4, 10               
-    	movz x5, (TIERRA & 0x0000FFFF), lsl 0	
-    	movk x5, (TIERRA >> 16), lsl 16
-    	bl dibujar_rectangulo
+    mov x3, 490               
+    mov x4, 10               
+    movz x5, (TIERRA & 0x0000FFFF), lsl 0	
+    movk x5, (TIERRA >> 16), lsl 16
+    bl dibujar_rectangulo
 	
 	mov x0, x20
-    	mov x1, 70      
+    mov x1, 70      
    	mov x2, 380                  
-    	mov x3, 510               
-    	mov x4, 9               
-    	movz x5, (TIERRA & 0x0000FFFF), lsl 0	
-    	movk x5, (TIERRA >> 16), lsl 16
-    	bl dibujar_rectangulo
+    mov x3, 510               
+    mov x4, 9               
+    movz x5, (TIERRA & 0x0000FFFF), lsl 0	
+    movk x5, (TIERRA >> 16), lsl 16
+    bl dibujar_rectangulo
     	
     	
     	
     	
-    	//Sombras de la tierra
-    	mov x0, x20
-    	mov x1, 90      
+    //Sombras de la tierra
+    mov x0, x20
+    mov x1, 90      
    	mov x2, 400                  
-    	mov x3, 470               
-    	mov x4, 2              
-    	movz x5, (TIERRA_MOJADA & 0x0000FFFF), lsl 0	
-    	movk x5, (TIERRA_MOJADA >> 16), lsl 16
-    	bl dibujar_rectangulo
+    mov x3, 470               
+    mov x4, 2              
+    movz x5, (TIERRA_MOJADA & 0x0000FFFF), lsl 0	
+    movk x5, (TIERRA_MOJADA >> 16), lsl 16
+    bl dibujar_rectangulo
     	
-    	mov x0, x20
-    	mov x1, 100      
+    mov x0, x20
+    mov x1, 100      
    	mov x2, 408                  
-    	mov x3, 440               
-    	mov x4, 2              
-    	movz x5, (TIERRA_MOJADA & 0x0000FFFF), lsl 0	
-    	movk x5, (TIERRA_MOJADA >> 16), lsl 16
-    	bl dibujar_rectangulo
+    mov x3, 440               
+    mov x4, 2              
+    movz x5, (TIERRA_MOJADA & 0x0000FFFF), lsl 0	
+    movk x5, (TIERRA_MOJADA >> 16), lsl 16
+    bl dibujar_rectangulo
     	
-    	mov x0, x20
-    	mov x1, 80      
+    mov x0, x20
+    mov x1, 80      
    	mov x2, 393                  
-    	mov x3, 490               
-    	mov x4, 2              
-    	movz x5, (TIERRA_MOJADA & 0x0000FFFF), lsl 0	
-    	movk x5, (TIERRA_MOJADA >> 16), lsl 16
-    	bl dibujar_rectangulo
+    mov x3, 490               
+    mov x4, 2              
+    movz x5, (TIERRA_MOJADA & 0x0000FFFF), lsl 0	
+    movk x5, (TIERRA_MOJADA >> 16), lsl 16
+    bl dibujar_rectangulo
     	
-    	mov x0, x20
-    	mov x1, 70      
+    mov x0, x20
+    mov x1, 70      
    	mov x2, 387                  
-    	mov x3, 510               
-    	mov x4, 2              
-    	movz x5, (TIERRA_MOJADA & 0x0000FFFF), lsl 0	
-    	movk x5, (TIERRA_MOJADA >> 16), lsl 16
-    	bl dibujar_rectangulo
+    mov x3, 510               
+    mov x4, 2              
+    movz x5, (TIERRA_MOJADA & 0x0000FFFF), lsl 0	
+    movk x5, (TIERRA_MOJADA >> 16), lsl 16
+    bl dibujar_rectangulo
     	
     	
     	
 	
 	//Pasto
 	mov x0, x20
-    	mov x1, 68      
+    mov x1, 68      
    	mov x2, 370                  
-    	mov x3, 515               
-    	mov x4, 10               
-    	movz x5, (PASTO & 0x0000FFFF), lsl 0	
-    	movk x5, (PASTO >> 16), lsl 16
-    	bl dibujar_rectangulo
+    mov x3, 515               
+    mov x4, 10               
+    movz x5, (PASTO & 0x0000FFFF), lsl 0	
+    movk x5, (PASTO >> 16), lsl 16
+    bl dibujar_rectangulo
     	
-    	mov x0, x20
-    	mov x1, 71      
+    mov x0, x20
+    mov x1, 71      
    	mov x2, 368                  
-    	mov x3, 508               
-    	mov x4, 9               
-    	movz x5, (PASTO & 0x0000FFFF), lsl 0	
-    	movk x5, (PASTO >> 16), lsl 16
-    	bl dibujar_rectangulo
+    mov x3, 508               
+    mov x4, 9               
+    movz x5, (PASTO & 0x0000FFFF), lsl 0	
+    movk x5, (PASTO >> 16), lsl 16
+    bl dibujar_rectangulo
     	
-    	//-----------------------------------------------------Arboles-------------------------------------------------------------
+//-----------------------------------------------------Arboles-------------------------------------------------------------
     	
-    	//Troncos
-    	mov x0, x20
-    	mov x1, 150     // x_inicio 
+    // ---------------------------------------------- Tronco1 (Izq)  ---------------------------------------------- 
+    mov x0, x20
+    mov x1, 150     // x_inicio 
    	mov x2, 225                 // y_inicio 
-    	mov x3, 20              // ancho 
-    	mov x4, 145             // alto 
-    	movz x5, (MADERA & 0x0000FFFF), lsl 0	//color
-    	movk x5, (MADERA >> 16), lsl 16
-    	bl dibujar_rectangulo
+    mov x3, 20              // ancho 
+    mov x4, 145             // alto 
+    movz x5, (MADERA & 0x0000FFFF), lsl 0	//color
+    movk x5, (MADERA >> 16), lsl 16
+    bl dibujar_rectangulo
     	
-    	mov x0, x20
-    	mov x1, 260     // x_inicio 
+    mov x0, x20
+    mov x1, 260     // x_inicio 
    	mov x2, 245                 // y_inicio 
-    	mov x3, 25              // ancho 
-    	mov x4, 125             // alto 
-    	movz x5, (MADERA & 0x0000FFFF), lsl 0	//color
-    	movk x5, (MADERA >> 16), lsl 16
-    	bl dibujar_rectangulo
+    mov x3, 25              // ancho 
+    mov x4, 125             // alto 
+    movz x5, (MADERA & 0x0000FFFF), lsl 0	//color
+    movk x5, (MADERA >> 16), lsl 16
+    bl dibujar_rectangulo
     	
     	
-    	//Sombras de los troncos
+    //  ---------------------------------------------- Sombras del tronco
 	mov x0, x20
-    	mov x1, 164     // x_inicio 
+    mov x1, 164     // x_inicio 
    	mov x2, 225                 // y_inicio 
-    	mov x3, 1              // ancho 
-    	mov x4, 145             // alto 
-    	movz x5, (SOMBRA_MADERA & 0x0000FFFF), lsl 0	//color
-    	movk x5, (SOMBRA_MADERA >> 16), lsl 16
-    	bl dibujar_rectangulo
+    mov x3, 1              // ancho 
+    mov x4, 145             // alto 
+    movz x5, (SOMBRA_MADERA & 0x0000FFFF), lsl 0	//color
+    movk x5, (SOMBRA_MADERA >> 16), lsl 16
+    bl dibujar_rectangulo
 	
 	mov x0, x20
-    	mov x1, 156     // x_inicio 
+    mov x1, 156     // x_inicio 
    	mov x2, 225                 // y_inicio 
-    	mov x3, 1              // ancho 
-    	mov x4, 145             // alto 
-    	movz x5, (SOMBRA_MADERA & 0x0000FFFF), lsl 0	//color
-    	movk x5, (SOMBRA_MADERA >> 16), lsl 16
-    	bl dibujar_rectangulo
+    mov x3, 1              // ancho 
+    mov x4, 145             // alto 
+    movz x5, (SOMBRA_MADERA & 0x0000FFFF), lsl 0	//color
+    movk x5, (SOMBRA_MADERA >> 16), lsl 16
+    bl dibujar_rectangulo
     	
     	
     	
     	
-    	//Sombras de los troncos
+// ---------------------------------------------- Sombras de los troncos ---------------------------------------------- 
 	mov x0, x20
-    	mov x1, 164      
+    mov x1, 164      
    	mov x2, 225                  
-    	mov x3, 1               
-    	mov x4, 145              
-    	movz x5, (SOMBRA_MADERA & 0x0000FFFF), lsl 0	
-    	movk x5, (SOMBRA_MADERA >> 16), lsl 16
-    	bl dibujar_rectangulo
+    mov x3, 1               
+    mov x4, 145              
+    movz x5, (SOMBRA_MADERA & 0x0000FFFF), lsl 0	
+    movk x5, (SOMBRA_MADERA >> 16), lsl 16
+    bl dibujar_rectangulo
 	
-		mov x0, x20
-    	mov x1, 156      
-   		mov x2, 225                  
-    	mov x3, 1               
-    	mov x4, 145              
-    	movz x5, (SOMBRA_MADERA & 0x0000FFFF), lsl 0	
-    	movk x5, (SOMBRA_MADERA >> 16), lsl 16
-    	bl dibujar_rectangulo
+	mov x0, x20
+    mov x1, 156      
+   	mov x2, 225                  
+    mov x3, 1               
+    mov x4, 145              
+    movz x5, (SOMBRA_MADERA & 0x0000FFFF), lsl 0	
+    movk x5, (SOMBRA_MADERA >> 16), lsl 16
+    bl dibujar_rectangulo
     	
     	
-    	//------------------------------------------Hojas grandes de los arboles estaticas-------------------------------------------
+    //------------------------------------------Hojas grandes de los arboles estaticas-------------------------------------------
     	
-    	mov x0, x20
-    	mov x1, 95     // x_inicio 
+    mov x0, x20
+    mov x1, 95     // x_inicio 
    	mov x2, 95                 // y_inicio 
-    	mov x3, 130              // ancho 
-    	mov x4, 130             // alto 
-    	movz x5, (HOJAS & 0x0000FFFF), lsl 0	//color
-    	movk x5, (HOJAS >> 16), lsl 16
-    	bl dibujar_rectangulo
+    mov x3, 130              // ancho 
+    mov x4, 130             // alto 
+    movz x5, (HOJAS & 0x0000FFFF), lsl 0	//color
+    movk x5, (HOJAS >> 16), lsl 16
+    bl dibujar_rectangulo
     	
-    	mov x0, x20
-    	mov x1, 80     // x_inicio 
+    mov x0, x20
+    mov x1, 80     // x_inicio 
    	mov x2, 140                 // y_inicio 
-    	mov x3, 40              // ancho 
-    	mov x4, 90             // alto 
-    	movz x5, (HOJAS & 0x0000FFFF), lsl 0	//color
-    	movk x5, (HOJAS >> 16), lsl 16
-    	bl dibujar_rectangulo
+    mov x3, 40              // ancho 
+    mov x4, 90             // alto 
+    movz x5, (HOJAS & 0x0000FFFF), lsl 0	//color
+    movk x5, (HOJAS >> 16), lsl 16
+    bl dibujar_rectangulo
     	
-    	mov x0, x20
-    	mov x1, 195     // x_inicio 
+    mov x0, x20
+    mov x1, 195     // x_inicio 
    	mov x2, 115                 // y_inicio 
-    	mov x3, 140              // ancho 
-    	mov x4, 140             // alto 
-    	movz x5, (HOJAS & 0x0000FFFF), lsl 0	//color
-    	movk x5, (HOJAS >> 16), lsl 16
-    	bl dibujar_rectangulo
+    mov x3, 140              // ancho 
+    mov x4, 140             // alto 
+    movz x5, (HOJAS & 0x0000FFFF), lsl 0	//color
+    movk x5, (HOJAS >> 16), lsl 16
+    bl dibujar_rectangulo
 	
 	
-		mov x0, x20
-    	mov x1, 270     // x_inicio 
-   		mov x2, 105                 // y_inicio 
-    	mov x3, 110              // ancho 
-    	mov x4, 110             // alto 
-    	movz x5, (HOJAS & 0x0000FFFF), lsl 0	//color
-    	movk x5, (HOJAS >> 16), lsl 16
-    	bl dibujar_rectangulo //--- arbol chiquito ---
+	mov x0, x20
+    mov x1, 270     // x_inicio 
+   	mov x2, 105                 // y_inicio 
+    mov x3, 110              // ancho 
+    mov x4, 110             // alto 
+    movz x5, (HOJAS & 0x0000FFFF), lsl 0	//color
+    movk x5, (HOJAS >> 16), lsl 16
+    bl dibujar_rectangulo //--- arbol chiquito ---
 	
 
 
@@ -984,7 +984,8 @@ main:
 //-------------------------------------- HOJAS DEL ARBOL ------------------------------------------------------------
 	mov x12, 0 //contador
 	mov x13, 110 //y_inicio
-	mov x14, 95 //x_inicio_izq
+	mov x14, 85 //x_inicio_izq_verde
+	mov x16, 85 //x_inicio_izq_blanco
 	mov x15, #115 //moverVertical
 	
 
@@ -997,70 +998,269 @@ main:
 		//x13=y_inicio    
 		//x14=x_inicio    
 	//---------FIN importante:-----------------------
+	// --- HOJAS LINEA 1 ---------
+		//------------- linea 1 blanco arbol ------------------
+    		mov x0, x20
+    		mov x1, x16
+			add x1,x1,#12 //NECESITO SUMAR 4 Y RESTAR 4 PARA EL MOVIMIENTO 
+   			mov x2, 120                       
+			//add x2, x2, #15    
+    		mov x3, 4               
+    		mov x4, 5              
+    		movz x5, (BLANCO_HOJAS & 0x0000FFFF), lsl 0	
+    		movk x5, (BLANCO_HOJAS >> 16), lsl 16
+    		bl dibujar_diagonal_izq
+		//------------- linea 1 blanco verde ------------------
+    		mov x0, x20
+			add x16,x16,#12
+    		mov x1, x16
+   			mov x2, 120                       
+			//add x2, x2, #15    
+    		mov x3, 4               
+    		mov x4, 5              
+    		movz x5, (VERDE_CLARO & 0x0000FFFF), lsl 0	
+    		movk x5, (VERDE_CLARO >> 16), lsl 16
+    		bl dibujar_diagonal_izq
+	// --- FIN HOJAS LINEA 1 ---------
+	// --- HOJAS LINEA 2 ---------
+		//------------- linea 1 blanco arbol ------------------
+    		mov x0, x20
+    		mov x1, x16
+			add x1,x1,#10
+   			mov x2, 150                       
+			//add x2, x2, #15    
+    		mov x3, 4               
+    		mov x4, 5              
+    		movz x5, (BLANCO_HOJAS & 0x0000FFFF), lsl 0	
+    		movk x5, (BLANCO_HOJAS >> 16), lsl 16
+    		bl dibujar_diagonal_izq
+		//------------- linea 1 blanco verde ------------------
+    		mov x0, x20
+			add x16,x16,#6
+    		mov x1, x16
+   			mov x2, 150                       
+			//add x2, x2, #15    
+    		mov x3, 4               
+    		mov x4, 5              
+    		movz x5, (VERDE_CLARO & 0x0000FFFF), lsl 0	
+    		movk x5, (VERDE_CLARO >> 16), lsl 16
+    		bl dibujar_diagonal_izq
+	// --- FIN HOJAS LINEA 2 ---------
 	
-	//------------- linea 1 arbol ------------------
-    	mov x0, x20
-    	mov x1, x14
-   		mov x2, 100                       
-		add x2, x2, #15    
-    	mov x3, 4               
-    	mov x4, 5              
-    	movz x5, (VERDE_CLARO & 0x0000FFFF), lsl 0	
-    	movk x5, (VERDE_CLARO >> 16), lsl 16
-    	bl dibujar_diagonal_izq
-	//------------- linea 2 arbol ------------------
-    	mov x0, x20
-    	mov x1, x14
-   		mov x2, 100
-		add x1, x1, #70    
-		add x2, x2, #45    
-    	mov x3, 4               
-    	mov x4, 5              
-    	movz x5, (VERDE_CLARO & 0x0000FFFF), lsl 0	
-    	movk x5, (VERDE_CLARO >> 16), lsl 16
-    	bl dibujar_diagonal_izq
-		  
-	//------------- linea 3 arbol ------------------
-    	mov x0, x20
-    	mov x1, x14
-   		mov x2, 100                       
-		add x1, x1, #110    
-		add x2, x2, #80    
-    	mov x3, 4               
-    	mov x4, 5              
-    	movz x5, (VERDE_CLARO & 0x0000FFFF), lsl 0	
-    	movk x5, (VERDE_CLARO >> 16), lsl 16
-    	bl dibujar_diagonal_izq
-	//------------- linea 4 arbol ------------------
-    	mov x0, x20
-    	mov x1, x14
-   		mov x2, 100
-		add x1, x1, #100    
-		add x2, x2, #115    
-    	mov x3, 4               
-    	mov x4, 5              
-    	movz x5, (VERDE_CLARO & 0x0000FFFF), lsl 0	
-    	movk x5, (VERDE_CLARO >> 16), lsl 16
-    	bl dibujar_diagonal_izq
-		  
-    	add x14, x14, 12
+	// -------- condicionales del bucle hojas --------------------
+    	add x14, x14, 1
     	add x13, x13, 1
     	add x12, x12, 1
-    	cmp x12, 11
+    	cmp x12, 10
 		blt hojas
 // -------------------------- DEVOLVER A 0 ------------------------------
 	mov x12, 0
 	mov x13, 0
 	mov x14, 0
 	mov x15, 0
+	mov x16, 0
 
+// ---------------------------------------------- INICIO NUBES  ---------------------------------------------- 
+	mov x14,#360
+	mov x15, #55		
+	// ---------------------------------------------- INICIO NUBE 1  ---------------------------------------------- 
+		//  ---------------------------------------------- centro 1  ----------------------------------------------
+	    	mov x0, x20 //mueve en eje x ➡️
+	    	mov x1, x14 //mueve en eje y ⬆️               
+	    	add x1, x1,#10 //mueve en eje y ⬆️               
+	    	mov x2, 40  //mueve en eje x ⬅️         	    
+	    	mov x3, 100  //mueve en eje y ⬇️             
+	    	mov x4, 30               
+	    	movz x5, (BLANCO_HOJAS & 0x0000FFFF), lsl 0 
+	    	movk x5, (BLANCO_HOJAS >> 16), lsl 16
+	    	bl dibujar_rectangulo
+		//  ---------------------------------------------- circulo superior 1 (IZQ -> DER)  ----------------------------------------------
+			mov x0, x20
+			mov x1, x14 //UBICAR EN X 
+			mov x2, x15  //UBICAR EN y x15=55
+			mov x3, 20  //DIAMETRO DEL CIRCULO
+			movz x4, (BLANCO_HOJAS & 0x0000FFFF), lsl 0
+			movk x4, (BLANCO_HOJAS >> 16), lsl 16
+			bl dibujar_circulo
+		//  ---------------------------------------------- circulo superior 2 (IZQ -> DER)  ----------------------------------------------
+	
+			mov x0, x20
+			mov x1, x14 //UBICAR EN X 
+			add x1,x1,#20
+			sub x15,x15,#20 //x15=55-20
+			mov x2, x15  //UBICAR EN y x15=35
+			mov x3, 15  //DIAMETRO DEL CIRCULO
+			movz x4, (BLANCO_HOJAS & 0x0000FFFF), lsl 0
+			movk x4, (BLANCO_HOJAS >> 16), lsl 16
+			bl dibujar_circulo
+		//  ---------------------------------------------- circulo superior 3 (IZQ -> DER)  ----------------------------------------------
+	
+			mov x0, x20
+			mov x1, x1 //UBICAR EN X 
+			add x1,x1,#20
+			mov x2, x15  //UBICAR EN y x15=35
+			mov x3, 10  //DIAMETRO DEL CIRCULO
+			movz x4, (BLANCO_HOJAS & 0x0000FFFF), lsl 0
+			movk x4, (BLANCO_HOJAS >> 16), lsl 16
+			bl dibujar_circulo
+		//  ---------------------------------------------- circulo superior 4 (IZQ -> DER)  ----------------------------------------------
+	
+			mov x0, x20
+			mov x1, x1 //UBICAR EN X 
+			add x1,x1,#20
+			mov x2, x15  //UBICAR EN y x15=35
+			mov x3, 18  //DIAMETRO DEL CIRCULO
+			movz x4, (BLANCO_HOJAS & 0x0000FFFF), lsl 0
+			movk x4, (BLANCO_HOJAS >> 16), lsl 16
+			bl dibujar_circulo
+		//  ---------------------------------------------- circulo superior 5 (IZQ -> DER)  ----------------------------------------------
+	
+			mov x0, x20
+			mov x1, x1 //UBICAR EN X 
+			add x1,x1,#35
+			add x15,x15,#20 //x15=35+20
+			mov x2, x15  //UBICAR EN y x15=55
+			mov x3, 25  //DIAMETRO DEL CIRCULO
+			movz x4, (BLANCO_HOJAS & 0x0000FFFF), lsl 0
+			movk x4, (BLANCO_HOJAS >> 16), lsl 16
+			bl dibujar_circulo
 
+		//  ---------------------------------------------- circulo inferior 1 (IZQ -> DER)  ----------------------------------------------
+	
+			mov x0, x20
+			mov x1, x14 //UBICAR EN X 
+			add x1,x1,#20
+			add x15,x15,#10
+			mov x2, x15  //UBICAR EN y
+			mov x3, 15  //DIAMETRO DEL CIRCULO
+			movz x4, (BLANCO_HOJAS & 0x0000FFFF), lsl 0
+			movk x4, (BLANCO_HOJAS >> 16), lsl 16
+			bl dibujar_circulo
+		//  ---------------------------------------------- circulo inferior 2 (IZQ -> DER)  ----------------------------------------------
+	
+			mov x0, x20
+			mov x1, x1 //UBICAR EN X 
+			add x1,x1,#20
+			mov x2, x15  //UBICAR EN y
+			mov x3, 10  //DIAMETRO DEL CIRCULO
+			movz x4, (BLANCO_HOJAS & 0x0000FFFF), lsl 0
+			movk x4, (BLANCO_HOJAS >> 16), lsl 16
+			bl dibujar_circulo
+		//  ---------------------------------------------- circulo inferior 3 (IZQ -> DER)  ----------------------------------------------
+	
+			mov x0, x20
+			mov x1, x1 //UBICAR EN X 
+			add x1,x1,#20
+			mov x2, x15  //UBICAR EN y
+			mov x3, 18  //DIAMETRO DEL CIRCULO
+			movz x4, (BLANCO_HOJAS & 0x0000FFFF), lsl 0
+			movk x4, (BLANCO_HOJAS >> 16), lsl 16
+			bl dibujar_circulo
 
+	// ---------------------------------------------- FIN NUBE 1  ----------------------------------------------
 
+	// ---------------------------------------------- INICIO NUBE 2  ----------------------------------------------
+	 mov x14, 210 
+		//  ---------------------------------------------- centro 1  ----------------------------------------------
+	    	mov x0, x20 //mueve en eje x ➡️
+	    	mov x1, x14 //mueve en eje x ⬆️               
+	    	add x1, x1,#10                
+	    	mov x2, 50  //mueve en eje x ⬅️         	    
+	    	mov x3, 100  //mueve en eje y ⬇️             
+	    	mov x4, 30               
+	    	movz x5, (BLANCO_HOJAS & 0x0000FFFF), lsl 0 
+	    	movk x5, (BLANCO_HOJAS >> 16), lsl 16
+	    	bl dibujar_rectangulo
+		//  ---------------------------------------------- circulo superior 1 (IZQ -> DER)  ----------------------------------------------
+			mov x0, x20
+			mov x1, x14 //UBICAR EN X 
+			mov x2, x15  //UBICAR EN y x15=55
+			mov x3, 20  //DIAMETRO DEL CIRCULO
+			movz x4, (BLANCO_HOJAS & 0x0000FFFF), lsl 0
+			movk x4, (BLANCO_HOJAS >> 16), lsl 16
+			bl dibujar_circulo
+		//  ---------------------------------------------- circulo superior 2 (IZQ -> DER)  ----------------------------------------------
+	
+			mov x0, x20
+			mov x1, x14 //UBICAR EN X 
+			add x1,x1,#20
+			sub x15,x15,#20 //x15=55-20
+			mov x2, x15  //UBICAR EN y x15=35
+			mov x3, 15  //DIAMETRO DEL CIRCULO
+			movz x4, (BLANCO_HOJAS & 0x0000FFFF), lsl 0
+			movk x4, (BLANCO_HOJAS >> 16), lsl 16
+			bl dibujar_circulo
+		//  ---------------------------------------------- circulo superior 3 (IZQ -> DER)  ----------------------------------------------
+	
+			mov x0, x20
+			mov x1, x1 //UBICAR EN X 
+			add x1,x1,#20
+			mov x2, x15  //UBICAR EN y x15=35
+			mov x3, 10  //DIAMETRO DEL CIRCULO
+			movz x4, (BLANCO_HOJAS & 0x0000FFFF), lsl 0
+			movk x4, (BLANCO_HOJAS >> 16), lsl 16
+			bl dibujar_circulo
+		//  ---------------------------------------------- circulo superior 4 (IZQ -> DER)  ----------------------------------------------
+	
+			mov x0, x20
+			mov x1, x1 //UBICAR EN X 
+			add x1,x1,#23
+			mov x2, x15  //UBICAR EN y x15=35
+			mov x3, 18  //DIAMETRO DEL CIRCULO
+			movz x4, (BLANCO_HOJAS & 0x0000FFFF), lsl 0
+			movk x4, (BLANCO_HOJAS >> 16), lsl 16
+			bl dibujar_circulo
+		//  ---------------------------------------------- circulo superior 5 (IZQ -> DER)  ----------------------------------------------
+	
+			mov x0, x20
+			mov x1, x1 //UBICAR EN X 
+			add x1,x1,#30
+			add x15,x15,#20 //x15=35+20
+			mov x2, x15  //UBICAR EN y x15=55
+			mov x3, 22  //DIAMETRO DEL CIRCULO
+			movz x4, (BLANCO_HOJAS & 0x0000FFFF), lsl 0
+			movk x4, (BLANCO_HOJAS >> 16), lsl 16
+			bl dibujar_circulo
 
+		//  ---------------------------------------------- circulo inferior 1 (IZQ -> DER)  ----------------------------------------------
+	
+			mov x0, x20
+			mov x1, x14 //UBICAR EN X 
+			add x1,x1,#20
+			add x15,x15,#10
+			mov x2, x15  //UBICAR EN y
+			mov x3, 15  //DIAMETRO DEL CIRCULO
+			movz x4, (BLANCO_HOJAS & 0x0000FFFF), lsl 0
+			movk x4, (BLANCO_HOJAS >> 16), lsl 16
+			bl dibujar_circulo
+		//  ---------------------------------------------- circulo inferior 2 (IZQ -> DER)  ----------------------------------------------
+	
+			mov x0, x20
+			mov x1, x1 //UBICAR EN X 
+			add x1,x1,#20
+			mov x2, 65  //UBICAR EN y
+			mov x3, 10  //DIAMETRO DEL CIRCULO
+			movz x4, (BLANCO_HOJAS & 0x0000FFFF), lsl 0
+			movk x4, (BLANCO_HOJAS >> 16), lsl 16
+			bl dibujar_circulo
+		//  ---------------------------------------------- circulo inferior 3 (IZQ -> DER)  ----------------------------------------------
+	
+			mov x0, x20
+			mov x1, x1 //UBICAR EN X 
+			add x1,x1,#20
+			mov x2, 65  //UBICAR EN y
+			mov x3, 18  //DIAMETRO DEL CIRCULO
+			movz x4, (BLANCO_HOJAS & 0x0000FFFF), lsl 0
+			movk x4, (BLANCO_HOJAS >> 16), lsl 16
+			bl dibujar_circulo
+	// ---------------------------------------------- FIN NUBE 2  ---------------------------------------------- 
+// ---------------------------------------------- FIN NUBES  ---------------------------------------------- 
+		// -------------------------- DEVOLVER A 0 ------------------------------
+		mov x14, 0
+		mov x15, 0
 
 //-----------------------------------Todo el movimiento de la imagen--------------------------------------------------------
-    	
+    
     	
     	movimiento_pixeles:
     	
@@ -1071,7 +1271,7 @@ main:
 	
 	
 	mov x0, x20
-    	mov x1, 362     // x_inicio 
+    mov x1, 362     // x_inicio 
    	mov x2, 349                 // y_inicio 
 	mov x3, 6              // ancho 
 	mov x4, 6             // alto 
@@ -1080,7 +1280,7 @@ main:
 	bl dibujar_diagonal_izq
 	
 	mov x0, x20
-    	mov x1, 360    //x_inicio  
+    mov x1, 360    //x_inicio  
    	mov x2, 348    //y_inicio              
     	mov x3, 20      //ancho         
     	mov x4, 7      //alto        
@@ -1089,16 +1289,16 @@ main:
     	bl dibujar_rectangulo
     	
 	mov x0, x20
-    	mov x1, 380    //x_inicio  
+    mov x1, 380    //x_inicio  
    	mov x2, 348    //y_inicio              
-    	mov x3, 6      //ancho         
-    	mov x4, 25      //alto        
-    	movz x5, (HOJAS_OSCURAS & 0x0000FFFF), lsl 0	
-    	movk x5, (HOJAS_OSCURAS >> 16), lsl 16
-    	bl dibujar_rectangulo
+    mov x3, 6      //ancho         
+    mov x4, 25      //alto        
+    movz x5, (HOJAS_OSCURAS & 0x0000FFFF), lsl 0	
+    movk x5, (HOJAS_OSCURAS >> 16), lsl 16
+    bl dibujar_rectangulo
     	
-    	mov x0, x20
-    	mov x1, 373    //x_inicio  
+    mov x0, x20
+    mov x1, 373    //x_inicio  
    	mov x2, 348    //y_inicio              
     	mov x3, 20      //ancho         
     	mov x4, 6      //alto        
