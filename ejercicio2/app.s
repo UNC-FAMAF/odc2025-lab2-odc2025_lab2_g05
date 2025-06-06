@@ -952,7 +952,7 @@ main:
     mov x0, x20
     mov x1, 80     // x_inicio 
    	mov x2, 140                 // y_inicio 
-    mov x3, 40    // ancho 
+    mov x3, 240      // ancho 
     mov x4, 90             // alto 
     movz x5, (HOJAS & 0x0000FFFF), lsl 0	//color
     movk x5, (HOJAS >> 16), lsl 16
@@ -969,9 +969,9 @@ main:
 	
 	
 	mov x0, x20
-    mov x1, 270     // x_inicio 
+    mov x1, 280     // x_inicio 
    	mov x2, 105                 // y_inicio 
-    mov x3, 110              // ancho 
+    mov x3, 140              // ancho 
     mov x4, 110             // alto 
     movz x5, (HOJAS & 0x0000FFFF), lsl 0	//color
     movk x5, (HOJAS >> 16), lsl 16
