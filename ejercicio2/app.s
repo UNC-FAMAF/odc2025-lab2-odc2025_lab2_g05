@@ -42,6 +42,7 @@
 .equ SOMBRA_SUELO, 0xFF1A202C
 .equ ESTRUCTURAS_LEJANAS, 0xFF805AD5
 .equ FONDO_OSCURO, 0xFF0D1018
+.equ NARANJA, 0xFFFFA42D
 
 
 
@@ -872,14 +873,45 @@ main:
     	movk x5, (PASTO >> 16), lsl 16
     	bl dibujar_rectangulo
     	
+    	//-----------------------------------------------------Arboles-------------------------------------------------------------
+    	
     	//Troncos
     	mov x0, x20
-    	mov x1, 150      
-   	mov x2, 225                  
-    	mov x3, 20               
-    	mov x4, 145              
-    	movz x5, (MADERA & 0x0000FFFF), lsl 0	
+    	mov x1, 150     // x_inicio 
+   	mov x2, 225                 // y_inicio 
+    	mov x3, 20              // ancho 
+    	mov x4, 145             // alto 
+    	movz x5, (MADERA & 0x0000FFFF), lsl 0	//color
     	movk x5, (MADERA >> 16), lsl 16
+    	bl dibujar_rectangulo
+    	
+    	mov x0, x20
+    	mov x1, 260     // x_inicio 
+   	mov x2, 245                 // y_inicio 
+    	mov x3, 25              // ancho 
+    	mov x4, 125             // alto 
+    	movz x5, (MADERA & 0x0000FFFF), lsl 0	//color
+    	movk x5, (MADERA >> 16), lsl 16
+    	bl dibujar_rectangulo
+    	
+    	
+    	//Sombras de los troncos
+	mov x0, x20
+    	mov x1, 164     // x_inicio 
+   	mov x2, 225                 // y_inicio 
+    	mov x3, 1              // ancho 
+    	mov x4, 145             // alto 
+    	movz x5, (SOMBRA_MADERA & 0x0000FFFF), lsl 0	//color
+    	movk x5, (SOMBRA_MADERA >> 16), lsl 16
+    	bl dibujar_rectangulo
+	
+	mov x0, x20
+    	mov x1, 156     // x_inicio 
+   	mov x2, 225                 // y_inicio 
+    	mov x3, 1              // ancho 
+    	mov x4, 145             // alto 
+    	movz x5, (SOMBRA_MADERA & 0x0000FFFF), lsl 0	//color
+    	movk x5, (SOMBRA_MADERA >> 16), lsl 16
     	bl dibujar_rectangulo
     	
     	
@@ -905,33 +937,46 @@ main:
     	bl dibujar_rectangulo
     	
     	
-    	//Hojas de los arboles
+    	//------------------------------------------Hojas grandes de los arboles estaticas-------------------------------------------
+    	
     	mov x0, x20
-		mov x1, 160 //Eje x
-		mov x2, 160 //Eje y
-		mov x3, 70 //Tamano
-	
-	//RECTANGULO ARBOL
-	mov x0, x20
-    mov x1, 105      
-   	mov x2, 120                  
-    mov x3, 110               
-    mov x4, 100              
-    movz x5, (HOJAS & 0x0000FFFF), lsl 0	
-    movk x5, (HOJAS >> 16), lsl 16
-    bl dibujar_rectangulo
-
-
-	//Flores
-
-	mov x0, x20
-    	mov x1, 350    //x_inicio  
-   		mov x2, 340    //y_inicio              
-    	mov x3, 8      //ancho         
-    	mov x4, 30      //alto        
-    	movz x5, (HOJAS_OSCURAS & 0x0000FFFF), lsl 0	
-    	movk x5, (HOJAS_OSCURAS >> 16), lsl 16
+    	mov x1, 95     // x_inicio 
+   	mov x2, 95                 // y_inicio 
+    	mov x3, 130              // ancho 
+    	mov x4, 130             // alto 
+    	movz x5, (HOJAS & 0x0000FFFF), lsl 0	//color
+    	movk x5, (HOJAS >> 16), lsl 16
     	bl dibujar_rectangulo
+    	
+    	mov x0, x20
+    	mov x1, 80     // x_inicio 
+   	mov x2, 140                 // y_inicio 
+    	mov x3, 40              // ancho 
+    	mov x4, 90             // alto 
+    	movz x5, (HOJAS & 0x0000FFFF), lsl 0	//color
+    	movk x5, (HOJAS >> 16), lsl 16
+    	bl dibujar_rectangulo
+    	
+    	mov x0, x20
+    	mov x1, 195     // x_inicio 
+   	mov x2, 115                 // y_inicio 
+    	mov x3, 140              // ancho 
+    	mov x4, 140             // alto 
+    	movz x5, (HOJAS & 0x0000FFFF), lsl 0	//color
+    	movk x5, (HOJAS >> 16), lsl 16
+    	bl dibujar_rectangulo
+	
+	
+	mov x0, x20
+    	mov x1, 270     // x_inicio 
+   	mov x2, 105                 // y_inicio 
+    	mov x3, 110              // ancho 
+    	mov x4, 110             // alto 
+    	movz x5, (HOJAS & 0x0000FFFF), lsl 0	//color
+    	movk x5, (HOJAS >> 16), lsl 16
+    	bl dibujar_rectangulo
+	
+
 
 
 
@@ -1077,9 +1122,433 @@ main:
 	mov x14, 0
 	mov x15, 0
 
-    	//Pajaros en movimiento
+
+
+
+
+
+//-----------------------------------Todo el movimiento de la imagen--------------------------------------------------------
     	
-    	pajaros:
+    	
+    	movimiento_pixeles:
+    	
+    	
+    	
+    	
+//-----------------------------------------Flores en movimiento-------------------------------------------------------------
+	
+	
+	mov x0, x20
+    	mov x1, 362     // x_inicio 
+   	mov x2, 349                 // y_inicio 
+	mov x3, 6              // ancho 
+	mov x4, 6             // alto 
+   	movz x5, (CIELO & 0x0000FFFF), lsl 0	//color
+   	movk x5, (CIELO >> 16), lsl 16
+	bl dibujar_diagonal_izq
+	
+	mov x0, x20
+    	mov x1, 360    //x_inicio  
+   	mov x2, 348    //y_inicio              
+    	mov x3, 20      //ancho         
+    	mov x4, 7      //alto        
+    	movz x5, (CIELO & 0x0000FFFF), lsl 0	
+    	movk x5, (CIELO >> 16), lsl 16
+    	bl dibujar_rectangulo
+    	
+	mov x0, x20
+    	mov x1, 380    //x_inicio  
+   	mov x2, 348    //y_inicio              
+    	mov x3, 6      //ancho         
+    	mov x4, 25      //alto        
+    	movz x5, (HOJAS_OSCURAS & 0x0000FFFF), lsl 0	
+    	movk x5, (HOJAS_OSCURAS >> 16), lsl 16
+    	bl dibujar_rectangulo
+    	
+    	mov x0, x20
+    	mov x1, 373    //x_inicio  
+   	mov x2, 348    //y_inicio              
+    	mov x3, 20      //ancho         
+    	mov x4, 6      //alto        
+    	movz x5, (NARANJA & 0x0000FFFF), lsl 0	
+    	movk x5, (NARANJA >> 16), lsl 16
+    	bl dibujar_rectangulo
+    	
+    	
+    	mov x0, x20
+    	mov x1, 192     // x_inicio 
+   	mov x2, 349                 // y_inicio 
+	mov x3, 6              // ancho 
+	mov x4, 6             // alto 
+   	movz x5, (CIELO & 0x0000FFFF), lsl 0	//color
+   	movk x5, (CIELO >> 16), lsl 16
+	bl dibujar_diagonal_izq
+	
+	mov x0, x20
+    	mov x1, 190    //x_inicio  
+   	mov x2, 348    //y_inicio              
+    	mov x3, 20      //ancho         
+    	mov x4, 7      //alto        
+    	movz x5, (CIELO & 0x0000FFFF), lsl 0	
+    	movk x5, (CIELO >> 16), lsl 16
+    	bl dibujar_rectangulo
+    	
+    	mov x0, x20
+    	mov x1, 210    //x_inicio  
+   	mov x2, 348    //y_inicio              
+    	mov x3, 6      //ancho         
+    	mov x4, 25      //alto        
+    	movz x5, (HOJAS_OSCURAS & 0x0000FFFF), lsl 0	
+    	movk x5, (HOJAS_OSCURAS >> 16), lsl 16
+    	bl dibujar_rectangulo
+    	
+    	mov x0, x20
+    	mov x1, 203    //x_inicio  
+   	mov x2, 348    //y_inicio              
+    	mov x3, 20      //ancho         
+    	mov x4, 6      //alto        
+    	movz x5, (NARANJA & 0x0000FFFF), lsl 0	
+    	movk x5, (NARANJA >> 16), lsl 16
+    	bl dibujar_rectangulo
+    	
+    	
+    	mov x0, x20
+    	mov x1, 442     // x_inicio 
+   	mov x2, 349                 // y_inicio 
+	mov x3, 6              // ancho 
+	mov x4, 6             // alto 
+   	movz x5, (CIELO & 0x0000FFFF), lsl 0	//color
+   	movk x5, (CIELO >> 16), lsl 16
+	bl dibujar_diagonal_izq
+	
+	mov x0, x20
+    	mov x1, 440    //x_inicio  
+   	mov x2, 348    //y_inicio              
+    	mov x3, 20      //ancho         
+    	mov x4, 7      //alto        
+    	movz x5, (CIELO & 0x0000FFFF), lsl 0	
+    	movk x5, (CIELO >> 16), lsl 16
+    	bl dibujar_rectangulo
+    	
+    	mov x0, x20
+    	mov x1, 460    //x_inicio  
+   	mov x2, 348    //y_inicio              
+    	mov x3, 6      //ancho         
+    	mov x4, 25      //alto        
+    	movz x5, (HOJAS_OSCURAS & 0x0000FFFF), lsl 0	
+    	movk x5, (HOJAS_OSCURAS >> 16), lsl 16
+    	bl dibujar_rectangulo
+    	
+    	mov x0, x20
+    	mov x1, 453    //x_inicio  
+   	mov x2, 348    //y_inicio              
+    	mov x3, 20      //ancho         
+    	mov x4, 6      //alto        
+    	movz x5, (NARANJA & 0x0000FFFF), lsl 0	
+    	movk x5, (NARANJA >> 16), lsl 16
+    	bl dibujar_rectangulo
+    	
+    	
+    	mov x8, 20000
+	bl funcion_delay
+	
+	
+	mov x0, x20
+    	mov x1, 380    //x_inicio  
+   	mov x2, 348    //y_inicio              
+    	mov x3, 6      //ancho         
+    	mov x4, 25      //alto 
+    	movz x5, (CIELO & 0x0000FFFF), lsl 0	//color
+    	movk x5, (CIELO >> 16), lsl 16
+    	bl dibujar_rectangulo
+    	
+    	mov x0, x20
+    	mov x1, 373    //x_inicio  
+   	mov x2, 348    //y_inicio              
+    	mov x3, 20      //ancho         
+    	mov x4, 6      //alto        
+    	movz x5, (CIELO & 0x0000FFFF), lsl 0	
+    	movk x5, (CIELO >> 16), lsl 16
+    	bl dibujar_rectangulo
+	
+	
+    	mov x0, x20
+    	mov x1, 380    //x_inicio  
+   	mov x2, 362    //y_inicio              
+    	mov x3, 6      //ancho         
+    	mov x4, 11      //alto        
+    	movz x5, (HOJAS_OSCURAS & 0x0000FFFF), lsl 0	
+    	movk x5, (HOJAS_OSCURAS >> 16), lsl 16
+    	bl dibujar_rectangulo
+    	
+    	mov x0, x20
+    	mov x1, 375    //x_inicio  
+   	mov x2, 348    //y_inicio              
+    	mov x3, 6      //ancho         
+    	mov x4, 16      //alto        
+    	movz x5, (HOJAS_OSCURAS & 0x0000FFFF), lsl 0	
+    	movk x5, (HOJAS_OSCURAS >> 16), lsl 16
+    	bl dibujar_rectangulo
+    	
+    	mov x0, x20
+    	mov x1, 368    //x_inicio  
+   	mov x2, 348    //y_inicio              
+    	mov x3, 20      //ancho         
+    	mov x4, 6      //alto        
+    	movz x5, (NARANJA & 0x0000FFFF), lsl 0	
+    	movk x5, (NARANJA >> 16), lsl 16
+    	bl dibujar_rectangulo
+    	
+    	
+    	mov x0, x20
+    	mov x1, 210    //x_inicio  
+   	mov x2, 348    //y_inicio              
+    	mov x3, 6      //ancho         
+    	mov x4, 25      //alto  
+    	movz x5, (CIELO & 0x0000FFFF), lsl 0	//color
+    	movk x5, (CIELO >> 16), lsl 16
+    	bl dibujar_rectangulo
+    	
+    	mov x0, x20
+    	mov x1, 203    //x_inicio  
+   	mov x2, 348    //y_inicio              
+    	mov x3, 20      //ancho         
+    	mov x4, 6      //alto         
+    	movz x5, (CIELO & 0x0000FFFF), lsl 0	
+    	movk x5, (CIELO >> 16), lsl 16
+    	bl dibujar_rectangulo
+    	
+    	
+    	mov x0, x20
+    	mov x1, 210    //x_inicio  
+   	mov x2, 362    //y_inicio              
+    	mov x3, 6      //ancho         
+    	mov x4, 11      //alto        
+    	movz x5, (HOJAS_OSCURAS & 0x0000FFFF), lsl 0	
+    	movk x5, (HOJAS_OSCURAS >> 16), lsl 16
+    	bl dibujar_rectangulo
+    	
+    	mov x0, x20
+    	mov x1, 205    //x_inicio  
+   	mov x2, 348    //y_inicio              
+    	mov x3, 6      //ancho         
+    	mov x4, 16      //alto        
+    	movz x5, (HOJAS_OSCURAS & 0x0000FFFF), lsl 0	
+    	movk x5, (HOJAS_OSCURAS >> 16), lsl 16
+    	bl dibujar_rectangulo
+    	
+    	mov x0, x20
+    	mov x1, 198    //x_inicio  
+   	mov x2, 348    //y_inicio              
+    	mov x3, 20      //ancho         
+    	mov x4, 6      //alto        
+    	movz x5, (NARANJA & 0x0000FFFF), lsl 0	
+    	movk x5, (NARANJA >> 16), lsl 16
+    	bl dibujar_rectangulo
+    	
+    	
+    	mov x0, x20
+    	mov x1, 460    //x_inicio  
+   	mov x2, 348    //y_inicio              
+    	mov x3, 6      //ancho         
+    	mov x4, 25      //alto    
+    	movz x5, (CIELO & 0x0000FFFF), lsl 0	//color
+    	movk x5, (CIELO >> 16), lsl 16
+    	bl dibujar_rectangulo
+    	
+    	mov x0, x20
+    	mov x1, 453    //x_inicio  
+   	mov x2, 348    //y_inicio              
+    	mov x3, 20      //ancho         
+    	mov x4, 6      //alto         
+    	movz x5, (CIELO & 0x0000FFFF), lsl 0	
+    	movk x5, (CIELO >> 16), lsl 16
+    	bl dibujar_rectangulo
+    	
+    	
+    	mov x0, x20
+    	mov x1, 460    //x_inicio  
+   	mov x2, 362    //y_inicio              
+    	mov x3, 6      //ancho         
+    	mov x4, 11      //alto        
+    	movz x5, (HOJAS_OSCURAS & 0x0000FFFF), lsl 0	
+    	movk x5, (HOJAS_OSCURAS >> 16), lsl 16
+    	bl dibujar_rectangulo
+    	
+    	mov x0, x20
+    	mov x1, 455    //x_inicio  
+   	mov x2, 348    //y_inicio              
+    	mov x3, 6      //ancho         
+    	mov x4, 16      //alto        
+    	movz x5, (HOJAS_OSCURAS & 0x0000FFFF), lsl 0	
+    	movk x5, (HOJAS_OSCURAS >> 16), lsl 16
+    	bl dibujar_rectangulo
+    	
+    	mov x0, x20
+    	mov x1, 448    //x_inicio  
+   	mov x2, 348    //y_inicio              
+    	mov x3, 20      //ancho         
+    	mov x4, 6      //alto        
+    	movz x5, (NARANJA & 0x0000FFFF), lsl 0	
+    	movk x5, (NARANJA >> 16), lsl 16
+    	bl dibujar_rectangulo
+
+    	
+    	mov x8, 20000
+	bl funcion_delay
+	
+	
+	mov x0, x20
+    	mov x1, 380    //x_inicio  
+   	mov x2, 362    //y_inicio              
+    	mov x3, 6      //ancho         
+    	mov x4, 11      //alto        
+    	movz x5, (CIELO & 0x0000FFFF), lsl 0	
+    	movk x5, (CIELO >> 16), lsl 16
+    	bl dibujar_rectangulo
+    	
+    	mov x0, x20
+    	mov x1, 375    //x_inicio  
+   	mov x2, 348    //y_inicio              
+    	mov x3, 6      //ancho         
+    	mov x4, 16      //alto        
+    	movz x5, (CIELO & 0x0000FFFF), lsl 0	
+    	movk x5, (CIELO >> 16), lsl 16
+    	bl dibujar_rectangulo
+    	
+    	mov x0, x20
+    	mov x1, 368    //x_inicio  
+   	mov x2, 348    //y_inicio              
+    	mov x3, 20      //ancho         
+    	mov x4, 6      //alto        
+    	movz x5, (CIELO & 0x0000FFFF), lsl 0	
+    	movk x5, (CIELO >> 16), lsl 16
+    	bl dibujar_rectangulo
+	
+	
+	mov x0, x20
+    	mov x1, 362     // x_inicio 
+   	mov x2, 349                 // y_inicio 
+	mov x3, 6              // ancho 
+	mov x4, 6             // alto 
+   	movz x5, (HOJAS_OSCURAS & 0x0000FFFF), lsl 0	//color
+   	movk x5, (HOJAS_OSCURAS >> 16), lsl 16
+	bl dibujar_diagonal_izq
+	
+	mov x0, x20
+    	mov x1, 360    //x_inicio  
+   	mov x2, 348    //y_inicio              
+    	mov x3, 20      //ancho         
+    	mov x4, 7      //alto        
+    	movz x5, (NARANJA & 0x0000FFFF), lsl 0	
+    	movk x5, (NARANJA >> 16), lsl 16
+    	bl dibujar_rectangulo
+    	
+    	
+    	mov x0, x20
+    	mov x1, 210    //x_inicio  
+   	mov x2, 362    //y_inicio              
+    	mov x3, 6      //ancho         
+    	mov x4, 11      //alto        
+    	movz x5, (CIELO & 0x0000FFFF), lsl 0	
+    	movk x5, (CIELO >> 16), lsl 16
+    	bl dibujar_rectangulo
+    	
+    	mov x0, x20
+    	mov x1, 205    //x_inicio  
+   	mov x2, 348    //y_inicio              
+    	mov x3, 6      //ancho         
+    	mov x4, 16      //alto        
+    	movz x5, (CIELO & 0x0000FFFF), lsl 0	
+    	movk x5, (CIELO >> 16), lsl 16
+    	bl dibujar_rectangulo
+    	
+    	mov x0, x20
+    	mov x1, 198    //x_inicio  
+   	mov x2, 348    //y_inicio              
+    	mov x3, 20      //ancho         
+    	mov x4, 6      //alto        
+    	movz x5, (CIELO & 0x0000FFFF), lsl 0	
+    	movk x5, (CIELO >> 16), lsl 16
+    	bl dibujar_rectangulo
+    	
+    	
+    	mov x0, x20
+    	mov x1, 192     // x_inicio 
+   	mov x2, 349                 // y_inicio 
+	mov x3, 6              // ancho 
+	mov x4, 6             // alto 
+   	movz x5, (HOJAS_OSCURAS & 0x0000FFFF), lsl 0	//color
+   	movk x5, (HOJAS_OSCURAS >> 16), lsl 16
+	bl dibujar_diagonal_izq
+	
+	mov x0, x20
+    	mov x1, 190    //x_inicio  
+   	mov x2, 348    //y_inicio              
+    	mov x3, 20      //ancho         
+    	mov x4, 7      //alto        
+    	movz x5, (NARANJA & 0x0000FFFF), lsl 0	
+    	movk x5, (NARANJA >> 16), lsl 16
+    	bl dibujar_rectangulo
+    	
+    	
+    	
+    	mov x0, x20
+    	mov x1, 460    //x_inicio  
+   	mov x2, 362    //y_inicio              
+    	mov x3, 6      //ancho         
+    	mov x4, 11      //alto        
+    	movz x5, (CIELO & 0x0000FFFF), lsl 0	
+    	movk x5, (CIELO >> 16), lsl 16
+    	bl dibujar_rectangulo
+    	
+    	mov x0, x20
+    	mov x1, 455    //x_inicio  
+   	mov x2, 348    //y_inicio              
+    	mov x3, 6      //ancho         
+    	mov x4, 16      //alto        
+    	movz x5, (CIELO & 0x0000FFFF), lsl 0	
+    	movk x5, (CIELO >> 16), lsl 16
+    	bl dibujar_rectangulo
+    	
+    	mov x0, x20
+    	mov x1, 448    //x_inicio  
+   	mov x2, 348    //y_inicio              
+    	mov x3, 20      //ancho         
+    	mov x4, 6      //alto        
+    	movz x5, (CIELO & 0x0000FFFF), lsl 0	
+    	movk x5, (CIELO >> 16), lsl 16
+    	bl dibujar_rectangulo
+    	
+    	mov x0, x20
+    	mov x1, 442     // x_inicio 
+   	mov x2, 349                 // y_inicio 
+	mov x3, 6              // ancho 
+	mov x4, 6             // alto 
+   	movz x5, (HOJAS_OSCURAS & 0x0000FFFF), lsl 0	//color
+   	movk x5, (HOJAS_OSCURAS >> 16), lsl 16
+	bl dibujar_diagonal_izq
+	
+	mov x0, x20
+    	mov x1, 440    //x_inicio  
+   	mov x2, 348    //y_inicio              
+    	mov x3, 20      //ancho         
+    	mov x4, 7      //alto        
+    	movz x5, (NARANJA & 0x0000FFFF), lsl 0	
+    	movk x5, (NARANJA >> 16), lsl 16
+    	bl dibujar_rectangulo
+    	
+    	
+    	mov x8, 20000
+	bl funcion_delay
+    	
+   
+    	
+    	
+    	
+    	//-----------------------------------------Pajaros en movimiento-------------------------------------------------------------
+
+
     	
     		mov x0, x20
     		mov x1, 54      
@@ -1142,9 +1611,8 @@ main:
     		movk x5, (PICO_PAJARO >> 16), lsl 16
     		bl dibujar_rectangulo
 	
-			mov x8, 20000
-		
-			bl funcion_delay
+		mov x8, 28000
+		bl funcion_delay
 
 		
 			mov x0, x20
@@ -1187,9 +1655,8 @@ main:
     		bl dibujar_rectangulo
     		
     		
-    		mov x8, 20000
-		
-			bl funcion_delay
+    		mov x8, 28000
+		bl funcion_delay
 		
 		
     		mov x0, x20
@@ -1231,11 +1698,10 @@ main:
     		bl dibujar_rectangulo
     			
     		mov x8,20000
-		
 		bl funcion_delay
 
 			
-    	b pajaros
+    	b movimiento_pixeles
 	
 
 InfLoop:
