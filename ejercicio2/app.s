@@ -25,6 +25,7 @@
 .equ TIERRA_MOJADA, 0xFF5E590F
 .equ CIELO, 0xFFC3D5EC 
 .equ PAJARO, 0xFFFFFFFF
+.equ BLANCO_HOJAS, 0xFFFFFFFF
 .equ PICO_PAJARO, 0xFFFFFF00
 .equ FONDO, 0xFF2E003E
 .equ ROSA, 0xFFFF66CC
@@ -967,14 +968,14 @@ main:
     	bl dibujar_rectangulo
 	
 	
-	mov x0, x20
+		mov x0, x20
     	mov x1, 270     // x_inicio 
-   	mov x2, 105                 // y_inicio 
+   		mov x2, 105                 // y_inicio 
     	mov x3, 110              // ancho 
     	mov x4, 110             // alto 
     	movz x5, (HOJAS & 0x0000FFFF), lsl 0	//color
     	movk x5, (HOJAS >> 16), lsl 16
-    	bl dibujar_rectangulo
+    	bl dibujar_rectangulo //--- arbol chiquito ---
 	
 
 
@@ -983,138 +984,69 @@ main:
 //-------------------------------------- HOJAS DEL ARBOL ------------------------------------------------------------
 	mov x12, 0 //contador
 	mov x13, 110 //y_inicio
-	mov x14, 90 //x_inicio_izq
-	mov x15, 120 //x_inicio_der
+	mov x14, 95 //x_inicio_izq
+	mov x15, #115 //moverVertical
 	
 
 	hojas:
-	//---------INICiO importante:-----------------------
+	//---------INICIO importante:-----------------------
 		//x1=x_inicio
 		//x2=y_inicio
 		//x3=ancho   
 		//x4=alto    
+		//x13=y_inicio    
+		//x14=x_inicio    
 	//---------FIN importante:-----------------------
 	
-	//------------- linea 2 arbol ------------------
-		mov x0, x20
-    	mov x1, x14      
-		add x1, x1, #5
-   		mov x2, 100                 
-		mov x3, 6              
-    	mov x4, 6             
-    	movz x5, (HOJAS_OSCURAS & 0x0000FFFF), lsl 0	
-    	movk x5, (HOJAS_OSCURAS >> 16), lsl 16
-    	bl dibujar_diagonal_izq
-    	
-    	mov x0, x20
-    	mov x1, x14
-		sub x1, x1,#20      
-   		mov x2, 100                  
-    	mov x3, 6               
-    	mov x4, 6              
-    	movz x5, (HOJAS_OSCURAS & 0x0000FFFF), lsl 0	
-    	movk x5, (HOJAS_OSCURAS >> 16), lsl 16
-    	bl dibujar_diagonal_der
-	
 	//------------- linea 1 arbol ------------------
-		mov x0, x20
-    	mov x1, x15      
-   		mov x2, 200                 
-    	mov x3, 6              
-    	mov x4, 6              
-    	movz x5, (HOJAS_OSCURAS & 0x0000FFFF), lsl 0	
-    	movk x5, (HOJAS_OSCURAS >> 16), lsl 16
-    	bl dibujar_diagonal_izq
-    	
     	mov x0, x20
     	mov x1, x14
-   		mov x2, 200                  
-    	mov x3, 6               
-    	mov x4, 6              
-    	movz x5, (ROJO & 0x0000FFFF), lsl 0	
-    	movk x5, (ROJO >> 16), lsl 16
-    	bl dibujar_diagonal_der
-    	//----------------------------------------------------------------------------
-
-		//mov x0, x20
-    	//mov x1, x14      
-   		//mov x2, 140                  
-    	//mov x3, 6               
-    	//mov x4, 6              
-    	//movz x5, (HOJAS_OSCURAS & 0x0000FFFF), lsl 0	
-    	//movk x5, (HOJAS_OSCURAS >> 16), lsl 16
-    	//bl dibujar_diagonal_der
-    	//
-    	//mov x0, x20
-    	//mov x1, x14      
-   		//mov x2, 150                  
-    	//mov x3, 6               
-    	//mov x4, 6              
-    	//movz x5, (HOJAS_OSCURAS & 0x0000FFFF), lsl 0	
-    	//movk x5, (HOJAS_OSCURAS >> 16), lsl 16
-    	//bl dibujar_diagonal_der
-    	//
-    	//
-    	//mov x0, x20
-    	//mov x1, x14      
-   		//mov x2, 160                  
-    	//mov x3, 6               
-    	//mov x4, 6              
-    	//movz x5, (HOJAS_OSCURAS & 0x0000FFFF), lsl 0	
-    	//movk x5, (HOJAS_OSCURAS >> 16), lsl 16
-    	//bl dibujar_diagonal_izq
-    	//
-    	//mov x0, x20
-    	//mov x1, x14      
-   		//mov x2, 170                  
-    	//mov x3, 6               
-    	//mov x4, 6              
-    	//movz x5, (HOJAS_OSCURAS & 0x0000FFFF), lsl 0	
-    	//movk x5, (HOJAS_OSCURAS >> 16), lsl 16
-    	//bl dibujar_diagonal_izq
-    	//    	mov x0, x20
-    	//mov x1, x14      
-   		//mov x2, 180                  
-    	//mov x3, 6               
-    	//mov x4, 6              
-    	//movz x5, (HOJAS_OSCURAS & 0x0000FFFF), lsl 0	
-    	//movk x5, (HOJAS_OSCURAS >> 16), lsl 16
-    	//bl dibujar_diagonal_der
-    	//
-    	//mov x0, x20
-    	//mov x1, x14      
-   		//mov x2, 190                  
-    	//mov x3, 6               
-    	//mov x4, 6              
-    	//movz x5, (HOJAS_OSCURAS & 0x0000FFFF), lsl 0	
-    	//movk x5, (HOJAS_OSCURAS >> 16), lsl 16
-    	//bl dibujar_diagonal_der
-    	//
-    	//
-    	//
-    	//mov x0, x20
-    	//mov x1, 110      
-   		//mov x2, x13                  
-    	//mov x3, 6               
-    	//mov x4, 6              
-    	//movz x5, (SOMBRA_HOJAS & 0x0000FFFF), lsl 0	
-    	//movk x5, (SOMBRA_HOJAS >> 16), lsl 16
-    	//bl dibujar_diagonal_izq
-		//
-    	//mov x0, x20
-    	//mov x1, x14      
-   		//mov x2, 210                  
-    	//mov x3, 6               
-    	//mov x4, 6              
-    	//movz x5, (SOMBRA_HOJAS & 0x0000FFFF), lsl 0	
-    	//movk x5, (SOMBRA_HOJAS >> 16), lsl 16
-    	//bl dibujar_diagonal_der
-    //-------------- ADD PARA QUE SE MUEVA ---------------------------
-    	add x15, x15, 8
-    	add x14, x14, 8
-    	add x13, x13, 8
+   		mov x2, 100                       
+		add x2, x2, #15    
+    	mov x3, 4               
+    	mov x4, 5              
+    	movz x5, (VERDE_CLARO & 0x0000FFFF), lsl 0	
+    	movk x5, (VERDE_CLARO >> 16), lsl 16
+    	bl dibujar_diagonal_izq
+	//------------- linea 2 arbol ------------------
+    	mov x0, x20
+    	mov x1, x14
+   		mov x2, 100
+		add x1, x1, #70    
+		add x2, x2, #45    
+    	mov x3, 4               
+    	mov x4, 5              
+    	movz x5, (VERDE_CLARO & 0x0000FFFF), lsl 0	
+    	movk x5, (VERDE_CLARO >> 16), lsl 16
+    	bl dibujar_diagonal_izq
+		  
+	//------------- linea 3 arbol ------------------
+    	mov x0, x20
+    	mov x1, x14
+   		mov x2, 100                       
+		add x1, x1, #110    
+		add x2, x2, #80    
+    	mov x3, 4               
+    	mov x4, 5              
+    	movz x5, (VERDE_CLARO & 0x0000FFFF), lsl 0	
+    	movk x5, (VERDE_CLARO >> 16), lsl 16
+    	bl dibujar_diagonal_izq
+	//------------- linea 4 arbol ------------------
+    	mov x0, x20
+    	mov x1, x14
+   		mov x2, 100
+		add x1, x1, #100    
+		add x2, x2, #115    
+    	mov x3, 4               
+    	mov x4, 5              
+    	movz x5, (VERDE_CLARO & 0x0000FFFF), lsl 0	
+    	movk x5, (VERDE_CLARO >> 16), lsl 16
+    	bl dibujar_diagonal_izq
+		  
+    	add x14, x14, 12
+    	add x13, x13, 1
     	add x12, x12, 1
-    	cmp x12, 12
+    	cmp x12, 11
 		blt hojas
 // -------------------------- DEVOLVER A 0 ------------------------------
 	mov x12, 0
