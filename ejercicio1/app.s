@@ -1,4 +1,5 @@
 
+
 //Constantes y definiciones globales
 .equ SCREEN_WIDTH, 640
 .equ SCREEN_HEIGH, 480
@@ -108,7 +109,7 @@ dibujar_rectangulo:
 	mov x25, x21 // x25 es nuestro contador. Lo inicializamos con y_inicio
 loop_rect_y:
 	add x26, x21, x23           // x26 = y_inicio + alto 
-    cmp x25, x26                // ¿y_actual (x25) >= y_inicio + alto (x26)?
+    cmp x25, x26                // Compara: ¿y_actual (x25) >= y_inicio + alto (x26)?
     bge end_rect_y              // Si sí salta al final del bucle Y.
 
     mov x27, x20                // x27 es nuestro contador 'x_actual'.
@@ -142,7 +143,7 @@ end_rect_y:
     ldp x23, x24, [sp], 16   // Restaura x23 y x24
     ldp x21, x22, [sp], 16   // Restaura x21 y x22
     ldp x19, x20, [sp], 16   // Restaura x19 y x20
-    ret                      
+    ret                      // Regresa al punto del código que llamó a dibujar_rectangulo.
 
 
 //------------------------------------------------------
@@ -201,13 +202,13 @@ loop_circle_x:
 
     b skip_draw_circle_pixel 
 
-draw_circle_pixel:       
+draw_circle_pixel:       //etiqueta para cuando el píxel está dentro del círculo
 
-    // Pasamos los argumentos a 'dibujar_pixel' 
-    mov x0, x19     
-    mov x1, x29     
-    mov x2, x26     
-    mov x3, x23     
+    // Pasamos los argumentos a 'dibujar_pixel' en los registros que espera (x0, x1, x2, x3).
+    mov x0, x19     //framebuffer_base 
+    mov x1, x29     //x_actual 
+    mov x2, x26     //y_actual
+    mov x3, x23     //color
     bl dibujar_pixel 
 
 skip_draw_circle_pixel:  
@@ -1278,6 +1279,9 @@ main:
 	movz x4, (AMARILLO & 0x0000FFFF), lsl 0
 	movk x4, (AMARILLO >> 16), lsl 16
 	bl dibujar_circulo
+
+
+
 
 
 InfLoop:
