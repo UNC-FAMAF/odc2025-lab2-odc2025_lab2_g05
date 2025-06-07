@@ -8,9 +8,4 @@ Descripción ejercicio 1: Consiste en el dibujo de una ciudad en un planeta extr
 
 Descripción ejercicio 2:
 
-Justificación instrucciones ARMv8:
-Instruccion: stp x?, x?, [sp, -16]! //ejemplo
-Usamos stp porque permite guardar dos registros en la pila y ajustar el puntero sp en una sola instrucción. esto es más corto y eficiente que usar tres instrucciones separadas
-
-Instruccion ldp x?, x?, [sp] #16 // ejemplo
-A su vez usamos ldp porque permite cargar dos registros desde la pila. Esto hace el código más eficiente y compacto.
+En este caso queriamos hacer una isla flotante con movimiento en algunos detalles de la isla como arboles, pajaros, las letras de odc y flores. Aqui las rutinas implementadas fueron las mismas que las del ej1, y ademas sumamos otras apartir de modificar las de dibujar rectangulos en el ej1, como tambien creamos una totalmente nueva para poder meter delays en medio de las animaciones. En este ejercicio separamos en dos archivos distintos el programa, en uno tiene todas las rutinas (rutinas.s), y en el otro todos los pixeles a pintar (app.s).
